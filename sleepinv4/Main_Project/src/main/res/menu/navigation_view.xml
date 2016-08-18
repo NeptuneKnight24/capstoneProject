@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_backhome"
+            android:icon="@drawable/hme_ic"
+            android:title="@string/menu_item_home"/>
+        <item
+            android:id="@+id/nav_personal_profile"
+            android:icon="@drawable/personal_profile_ic"
+            android:title="@string/menu_item_profile"/>
+        <item
+            android:id="@+id/nav_board"
+            android:icon="@drawable/b_and_l_ic"
+            android:title="@string/menu_item_transient"/>
+        <item
+            android:id="@+id/nav_accommodations"
+            android:icon="@drawable/accomodations_ic"
+            android:title="@string/menu_item_acc"/>
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/googlemap_ic"
+            android:title="@string/menu_item_map"/>
+    </group>
+
+
+</menu>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Sleep In</string>
+    <string name="developer">Sleep In Navigation</string>
+    <string name="website">Dagupan Version</string>
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_profile">Personal Profile</string>
+    <string name="menu_item_transient">Board and Lodging</string>
+    <string name="menu_item_acc">Accommodations</string>
+    <string name="menu_item_map">Google Map</string>
+
+    <string name="name_inputs">QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</string>
+
+
+</resources>
