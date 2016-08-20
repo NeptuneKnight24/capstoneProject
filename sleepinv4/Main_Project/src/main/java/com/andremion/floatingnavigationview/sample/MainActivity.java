@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.andremion.floatingnavigationview.FloatingNavigationView;
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private FloatingNavigationView mFloatingNavigationView;
+    Spinner occupation_spinner;
     Button personal_profile,accommodations,board_and_lodging,google_map;
     TextView personal_profile_text,accommodations_text,board_and_lodging_text,google_map_text;
 
