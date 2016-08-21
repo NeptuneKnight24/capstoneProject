@@ -8,10 +8,10 @@
     <string name="menu_item_acc">Accommodations</string>
     <string name="menu_item_map">Google Map</string>
 
-    <string name="name_inputs">QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</string>
+    <string name="name_inputs">|&#032;QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</string>
     <string name="number_inputs">0987654321-</string>
     <string name="email_inputs">!@#$%^*()_+~{}|:,?/.0987654321-QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</string>
-    <string name="username_password_inputs">0987654321-QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm_</string>
+    <string name="username_password_inputs">.0987654321-QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm_</string>
     <string-array name="occupation_status">
         <item>Employed</item>
         <item>Unemployed</item>

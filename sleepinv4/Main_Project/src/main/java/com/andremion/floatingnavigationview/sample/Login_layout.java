@@ -42,6 +42,7 @@ public class Login_layout extends Activity implements View.OnTouchListener{
                 //test if what button has been touch
                 if (view.getId() == R.id.login_btn) {
                     startActivity(new Intent(Login_layout.this,MainActivity.class));
+                    finish();
                 }else if(view.getId() == R.id.tv_text) {
                     startActivity(new Intent(Login_layout.this,Registration.class));
                 }
