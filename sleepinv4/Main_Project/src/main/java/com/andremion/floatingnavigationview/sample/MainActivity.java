@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private FloatingNavigationView mFloatingNavigationView;
     Spinner occupation_spinner;
     Button personal_profile,accommodations,board_and_lodging,google_map;
-    TextView personal_profile_text,accommodations_text,board_and_lodging_text,google_map_text;
+    TextView personal_profile_text,accommodations_text,board_and_lodging_text,google_map_text,user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         accommodations_text = (TextView) findViewById(R.id.tv_accom);
         board_and_lodging_text = (TextView) findViewById(R.id.tv_bandl);
         google_map_text = (TextView) findViewById(R.id.tv_ggmap);
+        user_name=(TextView)findViewById(R.id.tv_username);
+
+        Bundle bundle = getIntent().getExtras();
+        user_name.setText(bundle.getString("fname"));
 
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
         mFloatingNavigationView.setOnClickListener(new View.OnClickListener() {

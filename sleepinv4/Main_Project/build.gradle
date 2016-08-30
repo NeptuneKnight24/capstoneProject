@@ -24,6 +24,7 @@ def final APP_COMPAT_VERSION = "24.1.1"
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
+    compile 'com.mcxiaoke.volley:library:1.0.19'
     compile "com.android.support:design:$APP_COMPAT_VERSION"
     testCompile 'junit:junit:4.12'
 }
