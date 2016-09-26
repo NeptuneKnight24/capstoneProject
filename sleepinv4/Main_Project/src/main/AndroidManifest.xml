@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login_layout"
+            android:name=".Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
         </activity>
@@ -36,7 +36,27 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".Personal_Profile"
+            android:name=".RegistrationLandowner"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".PersonalProfile"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".BoardAndLodging"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Accomodations"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".UserLogin"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

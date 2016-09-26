@@ -3,6 +3,7 @@ package com.andremion.floatingnavigationview.sample;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
@@ -15,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,22 +34,27 @@ import java.util.Random;
 public class Registration extends Activity implements  AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener,View.OnTouchListener {
     private RadioGroup radioSexGroup;
     private RadioButton radioButton_male,radioButton_female;
-    TextView back_2_login_tv;
-    Button register_btn;
+    TextView back_2_login_tv,tenant_label,perinfo_label;
+    Button register_btn,back_to_choice_btn;
     EditText lastname_et,firstname_et,contact_number_et,email_address_et,username_et,password_et,confirm_password_et;
     Spinner occupation_spinner;
     //variables for textfield values
     String lastname_val="",firstname_val="",contact_number_val="",email_address_val="",
             username_val="",password_val="", final_password="",occupation_stat_val="",sex_type_val="",random_id="";
     AlertDialog.Builder builder;
-    String reg_url = "http://192.168.8.101/register.php";
+    String reg_url = "http://192.168.22.3/register.php";
     int i1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_layout);
 
-
+        //label reference
+        perinfo_label =(TextView)findViewById(R.id.tv_perinfo_label);
+        tenant_label =(TextView)findViewById(R.id.tv_tenant_label);
+        Typeface face= Typeface.createFromAsset(getAssets(),"fonts/Intro.otf");
+        tenant_label.setTypeface(face);
+        perinfo_label.setTypeface(face);
 
         //textfields reference
         lastname_et=(EditText)findViewById(R.id.et_lastname);
@@ -67,17 +72,22 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
 
 
         //button reference
+        back_to_choice_btn= (Button)findViewById(R.id.btn_back_to_choice);
         register_btn= (Button)findViewById(R.id.register_user_btn);
         //set the onTouchListener to perform actions
         register_btn.setOnTouchListener(this);
+        back_to_choice_btn.setOnTouchListener(this);
 
 
         //radiobuttons reference
         radioSexGroup=(RadioGroup)findViewById(R.id.radioSex);
+
+        //spinner reference
         occupation_spinner= (Spinner)findViewById(R.id.spinner_status);
 
         //textview reference
         back_2_login_tv=(TextView)findViewById(R.id.tv_text_goback);
+        back_2_login_tv.setTypeface(face);
         //set the onTouchListener to perform actions
         back_2_login_tv.setOnTouchListener(this);
 
@@ -154,7 +164,7 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                         builder.setMessage("Please fill up all the fields...");
                         displayAlert("input_error");
                     }
-                        else
+                    else
                     {
                         if (!password_val.equals(final_password))
                         {
@@ -212,9 +222,12 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                 }else if (view.getId() == R.id.tv_text_goback)
                 {
                     //perform action - go to layout
-                    startActivity(new Intent(Registration.this,Login_layout.class));
+                    startActivity(new Intent(Registration.this,Login.class));
                     finish();
 
+                }else if (view.getId() == R.id.btn_back_to_choice){
+                    startActivity(new Intent(Registration.this,UserLogin.class));
+                    finish();
                 }
 
         }

@@ -1,7 +1,5 @@
 package com.andremion.floatingnavigationview.sample;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Spinner occupation_spinner;
     Button personal_profile,accommodations,board_and_lodging,google_map;
     TextView personal_profile_text,accommodations_text,board_and_lodging_text,google_map_text,user_name;
+    public static  String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         personal_profile = (Button)findViewById(R.id.btn_personal_profile);
         accommodations = (Button)findViewById(R.id.btn_accommodations);
@@ -51,6 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         Bundle bundle = getIntent().getExtras();
         user_name.setText(bundle.getString("fname"));
+        fname_con = bundle.getString("fname");
+        lname_con = bundle.getString("lname");
+        level_con = bundle.getString("level");
+        gender_con = bundle.getString("gender");
+        type_con = bundle.getString("type");
+        num_con = bundle.getString("num");
+        email_con = bundle.getString("email");
+
 
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
         mFloatingNavigationView.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +74,49 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mFloatingNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
+                if(item.getItemId()== R.id.nav_personal_profile){
+                    Intent intent = new Intent(MainActivity.this,PersonalProfile.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fname",fname_con.toString());
+                    bundle.putString("lname",lname_con.toString());
+                    bundle.putString("level",level_con.toString());
+                    bundle.putString("gender",gender_con.toString());
+                    bundle.putString("type",type_con.toString());
+                    bundle.putString("num",num_con.toString());
+                    bundle.putString("email",email_con.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }else if(item.getItemId()== R.id.nav_accommodations){
+                   // startActivity(new Intent(MainActivity.this,Accomodations.class));
+                    Intent intent = new Intent(MainActivity.this,Accomodations.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fname",fname_con.toString());
+                    bundle.putString("lname",lname_con.toString());
+                    bundle.putString("level",level_con.toString());
+                    bundle.putString("gender",gender_con.toString());
+                    bundle.putString("type",type_con.toString());
+                    bundle.putString("num",num_con.toString());
+                    bundle.putString("email",email_con.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }else if(item.getItemId()== R.id.nav_board){
+                   // startActivity(new Intent(MainActivity.this,BoardAndLodging.class));
+                    Intent intent = new Intent(MainActivity.this,BoardAndLodging.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fname",fname_con.toString());
+                    bundle.putString("lname",lname_con.toString());
+                    bundle.putString("level",level_con.toString());
+                    bundle.putString("gender",gender_con.toString());
+                    bundle.putString("type",type_con.toString());
+                    bundle.putString("num",num_con.toString());
+                    bundle.putString("email",email_con.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+               // Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();
                 return true;
             }
@@ -90,11 +140,44 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 //test if what button has been touch
                 if (view.getId() == R.id.btn_personal_profile) {
                     Toast.makeText(this, personal_profile_text.getText(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, Personal_Profile.class));
+                    Intent intent = new Intent(MainActivity.this,PersonalProfile.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fname",fname_con.toString());
+                    bundle.putString("lname",lname_con.toString());
+                    bundle.putString("level",level_con.toString());
+                    bundle.putString("gender",gender_con.toString());
+                    bundle.putString("type",type_con.toString());
+                    bundle.putString("num",num_con.toString());
+                    bundle.putString("email",email_con.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 } else if (view.getId() == R.id.btn_accommodations) {
                     Toast.makeText(this, accommodations_text.getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,Accomodations.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fname",fname_con.toString());
+                    bundle.putString("lname",lname_con.toString());
+                    bundle.putString("level",level_con.toString());
+                    bundle.putString("gender",gender_con.toString());
+                    bundle.putString("type",type_con.toString());
+                    bundle.putString("num",num_con.toString());
+                    bundle.putString("email",email_con.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 } else if (view.getId() == R.id.btn_board_and_lodging) {
                     Toast.makeText(this, board_and_lodging_text.getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,BoardAndLodging.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fname",fname_con.toString());
+                    bundle.putString("lname",lname_con.toString());
+                    bundle.putString("level",level_con.toString());
+                    bundle.putString("gender",gender_con.toString());
+                    bundle.putString("type",type_con.toString());
+                    bundle.putString("num",num_con.toString());
+                    bundle.putString("email",email_con.toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    //startActivity(new Intent(MainActivity.this, BoardAndLodging.class));
                 } else if (view.getId() == R.id.btn_google_map) {
                     Toast.makeText(this, google_map_text.getText(), Toast.LENGTH_SHORT).show();
                 }
