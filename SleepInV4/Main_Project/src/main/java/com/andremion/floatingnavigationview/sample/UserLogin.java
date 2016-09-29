@@ -87,8 +87,10 @@ public class UserLogin extends Activity implements View.OnTouchListener{
                 if (view.getId() == R.id.continue_user_btn) {
                     if (choice.equals("Tenant")){
                         startActivity(new Intent(UserLogin.this,Registration.class));
+                        finish();
                     }else{
                         startActivity(new Intent(UserLogin.this,RegistrationLandowner.class));
+                        finish();
                     }
                 }else if(view.getId() == R.id.tv_text_goback) {
                     startActivity(new Intent(UserLogin.this,Login.class));

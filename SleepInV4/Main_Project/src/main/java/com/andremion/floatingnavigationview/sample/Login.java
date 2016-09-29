@@ -33,7 +33,7 @@ public class Login extends Activity implements View.OnTouchListener{
     TextView register_now;
     String username="",password="";
     AlertDialog.Builder builder;
-    String login_url = "http://192.168.22.3/login.php";
+    String login_url = "http://sleepin.comli.com/login-frontend.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
