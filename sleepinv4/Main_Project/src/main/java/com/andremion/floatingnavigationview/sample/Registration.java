@@ -42,7 +42,7 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
     String lastname_val="",firstname_val="",contact_number_val="",email_address_val="",
             username_val="",password_val="", final_password="",occupation_stat_val="",sex_type_val="",random_id="";
     AlertDialog.Builder builder;
-    String reg_url = "http://192.168.22.3/register.php";
+    String reg_url = "http://sleepin.comli.com/register.php";
     int i1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

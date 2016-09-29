@@ -17,4 +17,9 @@
         <item>Unemployed</item>
         <item>Student</item>
     </string-array>
+    <string-array name="unit_type">
+        <item>Apartment</item>
+        <item>Lodge</item>
+        <item>Transient</item>
+    </string-array>
 </resources>
