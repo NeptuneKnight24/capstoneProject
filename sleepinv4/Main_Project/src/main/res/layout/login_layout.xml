@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:maxLines="1"
                 android:id="@+id/et_username"
                 android:maxLength="25"
                 android:paddingLeft="@dimen/text_padding"
@@ -36,7 +37,7 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/et_password"
                 android:paddingLeft="@dimen/text_padding"
-
+                android:maxLines="1"
                 android:maxLength="25"
                 android:background="@drawable/textfield_bg"
                 android:layout_gravity="center"

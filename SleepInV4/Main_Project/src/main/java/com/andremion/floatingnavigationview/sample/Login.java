@@ -1,6 +1,7 @@
 package com.andremion.floatingnavigationview.sample;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -71,11 +72,13 @@ public class Login extends Activity implements View.OnTouchListener{
                     }
                     else
                     {
+                        final ProgressDialog loading = ProgressDialog.show(this,"Connecting...","Please wait...",false,false);
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, login_url,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
                                         try {
+                                            loading.dismiss();
                                             JSONArray jsonArray = new JSONArray(response);
                                             JSONObject jsonObject = jsonArray.getJSONObject(0);
                                             String code = jsonObject.getString("code");
@@ -97,6 +100,7 @@ public class Login extends Activity implements View.OnTouchListener{
                                                 bundle.putString("email",jsonObject.getString("email"));
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
+                                                finish();
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -107,6 +111,7 @@ public class Login extends Activity implements View.OnTouchListener{
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                loading.dismiss();
                                 Toast.makeText(Login.this,"Connection Error",Toast.LENGTH_SHORT).show();
                                 error.printStackTrace();
                             }
@@ -124,6 +129,7 @@ public class Login extends Activity implements View.OnTouchListener{
                     }
                 }else if(view.getId() == R.id.tv_text) {
                     startActivity(new Intent(Login.this,UserLogin.class));
+                    finish();
                 }
         }
         return true;

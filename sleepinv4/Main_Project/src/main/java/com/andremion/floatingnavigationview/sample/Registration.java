@@ -1,6 +1,7 @@
 package com.andremion.floatingnavigationview.sample;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -16,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,7 +44,7 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
     String lastname_val="",firstname_val="",contact_number_val="",email_address_val="",
             username_val="",password_val="", final_password="",occupation_stat_val="",sex_type_val="",random_id="";
     AlertDialog.Builder builder;
-    String reg_url = "http://sleepin.comli.com/register.php";
+    String reg_url = "http://sleepin.comli.com/register-tenant.php";
     int i1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,11 +176,13 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                         }
                         else
                         {
+                            final ProgressDialog loading = ProgressDialog.show(this,"Connecting...","Please wait...",false,false);
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, reg_url,
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
                                             try {
+                                                loading.dismiss();
                                                 JSONArray jsonArray = new JSONArray(response);
                                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                                                 String code = jsonObject.getString("code");
@@ -193,7 +197,9 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                                     }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-
+                                    loading.dismiss();
+                                    Toast.makeText(Registration.this,"Connection Error",Toast.LENGTH_SHORT).show();
+                                    error.printStackTrace();
                                 }
                             }){
                                 @Override

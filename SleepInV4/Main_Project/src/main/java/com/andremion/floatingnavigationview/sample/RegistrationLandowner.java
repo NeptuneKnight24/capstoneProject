@@ -1,6 +1,7 @@
 package com.andremion.floatingnavigationview.sample;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -260,11 +262,13 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                         }
                         else
                         {
+                            final ProgressDialog loading = ProgressDialog.show(this,"Connecting...","Please wait...",false,false);
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, reg_url,
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
                                             try {
+                                                loading.dismiss();
                                                 JSONArray jsonArray = new JSONArray(response);
                                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                                                 String code = jsonObject.getString("code");
@@ -279,6 +283,9 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                     }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
+                                    loading.dismiss();
+                                    Toast.makeText(RegistrationLandowner.this,"Connection Error",Toast.LENGTH_SHORT).show();
+                                    error.printStackTrace();
 
                                 }
                             }){
