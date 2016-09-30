@@ -67,8 +67,6 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     finish();
                 } else if(item.getItemId()== R.id.nav_personal_profile){
                    // startActivity(new Intent(Accomodations.this,PersonalProfile.class));
@@ -83,8 +81,6 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     finish();
                 }else if(item.getItemId()== R.id.nav_board){
                    // startActivity(new Intent(Accomodations.this,BoardAndLodging.class));
@@ -97,8 +93,6 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

@@ -63,8 +63,6 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     finish();
                 } else if(item.getItemId()== R.id.nav_accommodations){
                    // startActivity(new Intent(BoardAndLodging.this,Accomodations.class));
@@ -77,8 +75,6 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -95,8 +91,6 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     finish();
                 }
               //  Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
@@ -105,11 +99,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
             }
         });
 
-
-
-
     }
-
 
     @Override
     public void onBackPressed() {

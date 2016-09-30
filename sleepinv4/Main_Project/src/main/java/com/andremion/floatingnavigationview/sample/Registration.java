@@ -250,7 +250,9 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                 }
                 else if (code.equals("reg_success"))
                 {
+                    startActivity(new Intent(Registration.this,Login.class));
                     finish();
+
                 }
                 else if (code.equals("reg_failed"))
                 {

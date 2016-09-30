@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    finish();
                 } else if (view.getId() == R.id.btn_accommodations) {
                     Toast.makeText(this, accommodations_text.getText(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this,Accomodations.class);
@@ -164,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    finish();
                 } else if (view.getId() == R.id.btn_board_and_lodging) {
                     Toast.makeText(this, board_and_lodging_text.getText(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this,BoardAndLodging.class);
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    finish();
                     //startActivity(new Intent(MainActivity.this, BoardAndLodging.class));
                 } else if (view.getId() == R.id.btn_google_map) {
                     Toast.makeText(this, google_map_text.getText(), Toast.LENGTH_SHORT).show();

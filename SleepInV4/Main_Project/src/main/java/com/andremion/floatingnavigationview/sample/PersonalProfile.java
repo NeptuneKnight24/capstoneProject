@@ -125,8 +125,6 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     finish();
                    // startActivity(new Intent(PersonalProfile.this,MainActivity.class));
 
@@ -142,8 +140,6 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("email",email_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     finish();
                // startActivity(new Intent(PersonalProfile.this,Accomodations.class));
                 }else if(item.getItemId()== R.id.nav_board){
@@ -156,8 +152,6 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
