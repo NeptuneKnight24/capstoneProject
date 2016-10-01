@@ -347,6 +347,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 }
                 else if (code.equals("reg_success"))
                 {
+                    startActivity(new Intent(RegistrationLandowner.this,Login.class));
                     finish();
                 }
                 else if (code.equals("reg_failed"))
