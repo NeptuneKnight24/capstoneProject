@@ -15,13 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 
 public class PersonalProfile extends AppCompatActivity implements View.OnTouchListener {
     TextView lastname , firstname , usertype, gender,employmentstatus,contactnumber,emailad;
     private FloatingNavigationView mFloatingNavigationView;
     Button personal_profile,accommodations,board_and_lodging,google_map;
     NavigationView navigationView;
-    String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con;
+    String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con,imageURL_con;
+    String image_url;
+    NetworkImageView profile_pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         setContentView(R.layout.activity_main_personal_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //textview references
         lastname =(TextView)findViewById(R.id.tv_lastname);
         firstname =(TextView)findViewById(R.id.tv_firstname);
         usertype =(TextView)findViewById(R.id.tv_user_type);
@@ -37,6 +41,9 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         employmentstatus =(TextView)findViewById(R.id.tv_employment_status);
         contactnumber =(TextView)findViewById(R.id.tv_contact_number);
         emailad =(TextView)findViewById(R.id.tv_email_address);
+
+        //network image reference
+        profile_pic = (NetworkImageView)findViewById(R.id.iv_profile);
 
         accommodations = (Button)findViewById(R.id.btn_accomodations_2);
         accommodations.setOnTouchListener(new View.OnTouchListener() {
@@ -51,6 +58,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                 bundle.putString("type",type_con.toString());
                 bundle.putString("num",num_con.toString());
                 bundle.putString("email",email_con.toString());
+                bundle.putString("uploadpath",imageURL_con.toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
@@ -71,6 +79,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                 bundle.putString("type",type_con.toString());
                 bundle.putString("num",num_con.toString());
                 bundle.putString("email",email_con.toString());
+                bundle.putString("uploadpath",imageURL_con.toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
@@ -86,6 +95,10 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         employmentstatus.setText(bundle.getString("level"));
         contactnumber.setText(bundle.getString("num"));
         emailad.setText(bundle.getString("email"));
+        image_url = bundle.getString("uploadpath");
+        ImageLoader imageLoader = MySingletonForImage.getInstance().getImageLoader();
+        profile_pic.setImageUrl(image_url, imageLoader);
+
 
         fname_con = firstname.getText().toString();
         lname_con = lastname.getText().toString();
@@ -94,8 +107,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         type_con = usertype.getText().toString();
         num_con = contactnumber.getText().toString();
         email_con = emailad.getText().toString();
-
-
+        imageURL_con = image_url;
 
 
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
@@ -123,6 +135,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -138,6 +151,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -152,6 +166,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

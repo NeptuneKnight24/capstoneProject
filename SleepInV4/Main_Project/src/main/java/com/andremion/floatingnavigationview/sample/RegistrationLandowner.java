@@ -301,11 +301,11 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                     params.put("gender",sex_type_val);
                                     params.put("num",contact_number_val);
                                     params.put("email",email_address_val);
-                                    params.put("permit_number",land_address_val);
+                                    params.put("permit_number",business_permit_val);
                                     params.put("unit_type",unit_type_val);
                                     params.put("available_units",unit_numbers_val_final);
                                     params.put("fee_per_unit",fee_per_unit_val);
-                                    params.put("land_address",username_val);
+                                    params.put("land_address",land_address_val);
                                     params.put("uname",username_val);
                                     params.put("pword",final_password);
                                     params.put(KEY_IMAGE, image);

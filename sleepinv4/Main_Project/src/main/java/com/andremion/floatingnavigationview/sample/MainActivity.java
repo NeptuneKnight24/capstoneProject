@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Spinner occupation_spinner;
     Button personal_profile,accommodations,board_and_lodging,google_map;
     TextView personal_profile_text,accommodations_text,board_and_lodging_text,google_map_text,user_name;
-    public static  String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con;
+    public static  String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con,imageURL_con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         type_con = bundle.getString("type");
         num_con = bundle.getString("num");
         email_con = bundle.getString("email");
+       // imageURL_con = bundle.getString("uploadpath");
 
 
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                   // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                   // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                   // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -149,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                   // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -163,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                   // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -177,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                   // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

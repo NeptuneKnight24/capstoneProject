@@ -17,7 +17,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
 
     private FloatingNavigationView mFloatingNavigationView;
     NavigationView navigationView;
-    String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con;
+    String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con,imageURL_con;
 
 
 
@@ -36,6 +36,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
         type_con = bundle.getString("type");
         num_con = bundle.getString("num");
         email_con = bundle.getString("email");
+        imageURL_con= bundle.getString("uploadpath");
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
         mFloatingNavigationView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -75,6 +77,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
@@ -89,6 +92,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

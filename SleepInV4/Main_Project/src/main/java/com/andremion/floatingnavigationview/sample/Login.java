@@ -98,6 +98,7 @@ public class Login extends Activity implements View.OnTouchListener{
                                                 bundle.putString("type",jsonObject.getString("user_type"));
                                                 bundle.putString("num",jsonObject.getString("num"));
                                                 bundle.putString("email",jsonObject.getString("email"));
+                                              //  bundle.putString("uploadpath",jsonObject.getString("upload_path"));
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
                                                 finish();
