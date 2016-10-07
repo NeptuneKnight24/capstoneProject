@@ -1,8 +1,10 @@
 package com.andremion.floatingnavigationview.sample;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,7 +16,9 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_layout);
-
+        ActivityCompat.requestPermissions(SplashScreen.this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                1);
         ImageView fadeOutImage = (ImageView) findViewById(R.id.iv_logo);
         ImageView cloudone = (ImageView) findViewById(R.id.iv_cloud_one);
         ImageView cloudtwo = (ImageView) findViewById(R.id.iv_cloud_two);
@@ -23,6 +27,8 @@ public class SplashScreen extends AppCompatActivity {
         ImageView cloudfive = (ImageView) findViewById(R.id.iv_cloud_five);
         ImageView cloudsix = (ImageView) findViewById(R.id.iv_cloud_six);
 
+//        ImageView upang_logo = (ImageView) findViewById(R.id.iv_upang_logo);
+//        ImageView cite_logo = (ImageView) findViewById(R.id.iv_cite_logo);
 
         Animation startFadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_animation);
         fadeOutImage.startAnimation(startFadeInAnimation);
@@ -46,10 +52,13 @@ public class SplashScreen extends AppCompatActivity {
         anim_six.setDuration(5500);
         cloudsix.setAnimation(anim_six);
 
+
+
+
           new Handler().postDelayed(new Runnable() {
               @Override
               public void run() {
-                  startActivity(new Intent(SplashScreen.this,Login.class));
+                  startActivity(new Intent(SplashScreen.this,GoogleMap.class));
                   finish();
               }
           },4700);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +16,7 @@
             android:layout_gravity="left"
             android:background="@drawable/back_btn_bg"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>/>
+            android:layout_marginLeft="10dp"/>/
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,13 +28,13 @@
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="400dp"
+            android:animateLayoutChanges="true"
             android:layout_gravity="center">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="380dp"
-                android:layout_gravity="center">
+                android:animateLayoutChanges="true">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,6 +135,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_gravity="center">
+
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -146,24 +147,26 @@
                             android:digits="@string/number_inputs"
                             android:layout_marginTop="5dp"/>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center">
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/textfield_bg"
-                                android:hint="Email Address"
-                                android:maxLength="30"
-                                android:maxLines="1"
-                                android:paddingLeft="@dimen/text_padding"
-                                android:id="@+id/et_email_address"
-                                android:digits="@string/email_inputs"
-                                android:layout_marginTop="5dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/textfield_bg"
+                            android:hint="Email Address"
+                            android:maxLength="30"
+                            android:maxLines="1"
+                            android:paddingLeft="@dimen/text_padding"
+                            android:id="@+id/et_email_address"
+                            android:digits="@string/email_inputs"
+                            android:layout_marginTop="5dp"/>
+                </LinearLayout>
+
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -172,98 +175,279 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="10dp"
-                                android:textSize="17sp"
+                                android:textSize="20sp"
                                 android:id="@+id/tv_landinfo_label"
-                                android:text="Transient/Lodge Information"/>
+                                android:text="Business Permit"/>
                     </LinearLayout>
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_gravity="center">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/textfield_bg"
-                            android:hint="Business Permit Number"
-                            android:maxLength="11"
-                            android:paddingLeft="@dimen/text_padding"
-                            android:id="@+id/et_permit_number"
-                            android:digits="@string/number_inputs"
-                            android:layout_marginTop="5dp"/>
-                    </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:textSize="18sp"
-                        android:text="Unit Type: "/>
-                    <Spinner
-                        android:layout_width="115dp"
-                        android:layout_height="25dp"
-                        android:textSize="10sp"
-                        android:paddingRight="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/spinner_unit_type" />
-                </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp">
-                            <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="10dp"
-                            android:textSize="20sp"
-                                android:paddingTop="60dp"
-                            android:text="Available units: "/>
-                            <NumberPicker
-                            android:layout_width="50dp"
-                            android:layout_height="150dp"
-                            android:id="@+id/np_available_units">
-                        </NumberPicker>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center">
-                        <EditText
+                        android:animateLayoutChanges="true">
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/textfield_bg"
-                            android:hint="Fee Per unit"
-                            android:maxLength="6"
-                            android:paddingLeft="@dimen/text_padding"
-                            android:id="@+id/et_fee_per_unit"
-                            android:digits="@string/number_inputs"
-                            android:layout_marginTop="5dp"/>
-                    </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/textfield_bg"
-                        android:hint="Address"
-                        android:maxLength="30"
-                        android:maxLines="1"
-                        android:paddingLeft="@dimen/text_padding"
-                        android:id="@+id/et_land_address"
-                        android:digits="@string/email_inputs"
-                        android:layout_marginTop="5dp"/>
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="15dp">
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Apartment"
+                                android:id="@+id/cb_apartment"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:id="@+id/ll_apartment_group">
+                                <EditText
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Building Permit"
+                                    android:layout_marginLeft="10dp"
+                                    android:id="@+id/et_apartment_bp"
+                                    android:maxLines="1"
+                                    android:textSize="13sp"
+                                    android:maxLength="10"
+                                    android:paddingLeft="7dp"
+                                    android:digits="@string/number_inputs"
+                                    android:background="@drawable/mini_textfield_bg"/>
+                                <EditText
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="# of units"
+                                    android:id="@+id/et_apartment_no_units"
+                                    android:layout_marginLeft="10dp"
+                                    android:maxLines="1"
+                                    android:digits="@string/number_inputs"
+                                    android:paddingLeft="5dp"
+                                    android:maxLength="3"
+                                    android:background="@drawable/mini_textfield_bg"/>
+                                <EditText
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Price"
+                                    android:id="@+id/et_apartment_price"
+                                    android:layout_marginLeft="10dp"
+                                    android:maxLines="1"
+                                    android:paddingLeft="7dp"
+                                    android:maxLength="3"
+                                    android:digits="@string/number_inputs"
+                                    android:background="@drawable/mini_textfield_bg"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/ll_apartment_location_group"
+                            android:gravity="center">
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="Location"
+                                android:id="@+id/et_apartment_location"
+                                android:maxLines="1"
+                                android:paddingLeft="5dp"
+                                android:background="@drawable/mini_textfield_bg"/>
+                            <Button
+                                android:layout_width="90dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/btn_search_location_apartment"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/search_btn_bg" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp">
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Transient"
+                                android:textSize="15sp"
+                                android:id="@+id/cb_transients"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:id="@+id/ll_transient_group">
+                                <EditText
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Building Permit"
+                                    android:layout_marginLeft="10dp"
+                                    android:id="@+id/et_transient_bp"
+                                    android:maxLines="1"
+                                    android:textSize="13sp"
+                                    android:paddingLeft="7dp"
+                                    android:digits="@string/number_inputs"
+                                    android:background="@drawable/mini_textfield_bg"/>
+
+                                <EditText
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:hint="# of units"
+                                    android:id="@+id/et_transient_no_units"
+                                    android:layout_marginLeft="10dp"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:maxLength="3"
+                                    android:digits="@string/number_inputs"
+                                    android:background="@drawable/mini_textfield_bg"/>
+
+                                <EditText
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Price"
+                                    android:layout_marginLeft="10dp"
+                                    android:id="@+id/et_transient_price"
+                                    android:maxLines="1"
+                                    android:paddingLeft="7dp"
+                                    android:maxLength="3"
+                                    android:digits="@string/number_inputs"
+                                    android:background="@drawable/mini_textfield_bg"/>/>
+                                </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/ll_transient_location_group"
+                            android:gravity="center">
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="Location"
+                                android:id="@+id/et_transient_location"
+                                android:maxLines="1"
+                                android:paddingLeft="5dp"
+                                android:background="@drawable/mini_textfield_bg"/>/>
+
+                            <Button
+                                android:layout_width="90dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/btn_search_location_transient"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/search_btn_bg" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp">
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Bedspace"
+                                android:textSize="15sp"
+                                android:id="@+id/cb_bedspace"/>
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:id="@+id/ll_bedspace_group">
+                                    <EditText
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Building Permit"
+                                        android:layout_marginLeft="10dp"
+                                        android:maxLines="1"
+                                        android:paddingLeft="7dp"
+                                        android:textSize="13sp"
+                                        android:maxLength="1"
+                                        android:digits="@string/number_inputs"
+                                        android:background="@drawable/mini_textfield_bg"/>/>
+                                    <EditText
+                                        android:layout_width="120dp"
+                                        android:layout_height="wrap_content"
+                                        android:hint="# of units"
+                                        android:id="@+id/et_bedspace_no_units"
+                                        android:layout_marginLeft="10dp"
+                                        android:maxLines="1"
+                                        android:paddingLeft="5dp"
+                                        android:maxLength="3"
+                                        android:digits="@string/number_inputs"
+                                        android:background="@drawable/mini_textfield_bg"/>/>
+                                    <EditText
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Price"
+                                        android:layout_marginLeft="10dp"
+                                        android:id="@+id/et_bedspace_price"
+                                        android:maxLines="1"
+                                        android:paddingLeft="7dp"
+                                        android:maxLength="3"
+                                        android:digits="@string/number_inputs"
+                                        android:background="@drawable/mini_textfield_bg"/>/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:id="@+id/ll_bedspace_location_group">
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="Location"
+                                android:id="@+id/et_bedspace_location"
+                                android:maxLines="1"
+                                android:paddingLeft="5dp"
+                                android:background="@drawable/mini_textfield_bg"/>/>
+                            <Button
+                                android:layout_width="90dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/btn_search_location_bedspace"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/search_btn_bg" />
+                        </LinearLayout>
+                       <!-- <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:id="@+id/ll_total_units_group">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="15sp"
+                                android:id="@+id/tv_unit_number_label"
+                                android:text="Total number of units"/>
+                            <EditText
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:digits="@string/number_inputs"
+                                android:maxLength="3"
+                                android:enabled="false"
+                                android:id="@+id/et_total_unit"
+                                android:layout_marginLeft="10dp"
+                                android:background="#ffffff"/>
+                        </LinearLayout>-->
                 </LinearLayout>
-                    <LinearLayout
+                </HorizontalScrollView>
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -275,8 +459,8 @@
                             android:textSize="20sp"
                             android:id="@+id/tv_userinfo_label"
                             android:text="Login Details"/>
-                    </LinearLayout>
-                    <LinearLayout
+                </LinearLayout>
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -288,8 +472,8 @@
                             android:textSize="20sp"
                             android:id="@+id/tv_profile_pic_label"
                             android:text="Profile Picture"/>
-                    </LinearLayout>
-                    <LinearLayout
+                </LinearLayout>
+                <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -299,9 +483,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="250dp"
                             android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/main_logo"
                             android:id="@+id/iv_profile_picture" />
-                    </LinearLayout>
-                      <LinearLayout
+                </LinearLayout>
+                <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -314,8 +500,8 @@
                               android:layout_gravity="center"
                               android:background="@drawable/select_image_btn_bg"
                               android:layout_marginTop="10dp"/>
-                      </LinearLayout>
-                    <LinearLayout
+                </LinearLayout>
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -331,8 +517,8 @@
                                 android:id="@+id/et_username"
                                 android:digits="@string/username_password_inputs"
                                 android:layout_marginTop="5dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                </LinearLayout>
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -349,8 +535,8 @@
                                 android:digits="@string/username_password_inputs"
                                 android:layout_marginTop="5dp"
                                 android:inputType="textPassword" />
-                    </LinearLayout>
-                    <LinearLayout
+                </LinearLayout>
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -367,10 +553,11 @@
                             android:id="@+id/et_confirm_password"
                             android:digits="@string/username_password_inputs"
                             android:layout_marginTop="5dp"
-                            android:inputType="textPassword" />
-                     </LinearLayout>
+                            android:inputType="textPassword"/>
+                </LinearLayout>
               </LinearLayout>
         </ScrollView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -383,6 +570,7 @@
                 android:background="@drawable/register_btn_bg"
                 android:layout_marginTop="10dp"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -398,4 +586,4 @@
                 android:layout_gravity="center" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

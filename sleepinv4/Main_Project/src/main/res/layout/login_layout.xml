@@ -50,13 +50,20 @@
                 android:id="@+id/login_btn"
                 android:background="@drawable/login_btn_bg"
                 android:layout_marginTop="20dp"/>
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:id="@+id/back_to_map_btn"
+                android:background="@drawable/map_view_btn_bg"
+                android:layout_marginTop="5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:text="Not yet registered? Register now!"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
                 android:id="@+id/tv_text"
                 android:layout_gravity="center" />
         </LinearLayout>

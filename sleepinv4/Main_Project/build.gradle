@@ -26,7 +26,8 @@ dependencies {
     compile project(':library')
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.google.android.gms:play-services-maps:7.8.0'
+    compile 'com.google.android.gms:play-services-location:7.8.0'
     compile "com.android.support:design:$APP_COMPAT_VERSION"
     testCompile 'junit:junit:4.12'
 }

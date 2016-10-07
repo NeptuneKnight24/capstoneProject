@@ -1,16 +1,16 @@
 	<?php
 require "init.php";
-$uid = $_POST["id"];
+$uid = $_POST["uid"];
 $lname = $_POST["lname"];
 $fname = $_POST["fname"];
 $mname = $_POST["midname"];
 $gender = $_POST["gender"];
 $num = $_POST["num"];
-$permitnumber = $_POST["permit_number"];
-$unittype = $_POST["unit_type"];
-$availableunits = $_POST["available_units"];
-$feeperunit = $_POST["fee_per_unit"];
-$landaddress = $_POST["land_address"];
+$permitnumber =  $_POST["permit_number"];
+$unittype =  $_POST["unit_type"];
+$availableunits =  $_POST["available_units"];
+$feeperunit =  $_POST["fee_per_unit"];
+$landaddress =  $_POST["email"];
 $email = $_POST["email"];
 $uname = $_POST["uname"];
 $pword = $_POST["pword"];
@@ -20,7 +20,7 @@ $status ="Inactive";
 $path = "uploads/$uid.png";
 $actualpath = "http://sleepin.comli.com/$path";
 
-$sql = "select * from tbl_landowner where email like '".$email."'and uname like '".$uname."';";
+$sql = "SELECT * from tbl_landowner where uname like '".$uname."';";
 
 $result = mysqli_query($con,$sql);
 $response = array();
@@ -28,7 +28,7 @@ $response = array();
 if(mysqli_num_rows($result)>0)
 {
 	$code ="reg_failed";
-	$message ="User already existing";
+	$message ="USER ALREADY EXIST! Registration Denied";
 	array_push($response,array("code"=>$code,"message"=>$message));
 	echo json_encode($response);
 }
@@ -38,7 +38,7 @@ else
 	$result = mysqli_query($con,$sql);
 	file_put_contents($path,base64_decode($image));
 	$code ="reg_success";
-	$message ="Thank you for registering!";
+	$message ="Congratulations! Your account has been created.The Admin will verify your details to activate your account.You may enter your log-in credentials within an hour";
 	array_push($response,array("code"=>$code,"message"=>$message));
 	echo json_encode($response);
 }

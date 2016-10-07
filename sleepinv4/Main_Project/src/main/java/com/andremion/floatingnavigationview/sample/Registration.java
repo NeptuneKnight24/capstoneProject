@@ -104,7 +104,6 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
         occupation_stat_val = "Employed";
         sex_type_val="MALE";
 
-
         //set values for radiobutton variable
         radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -116,8 +115,6 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                 }
             }
         });
-
-
     }
 
     @Override
@@ -125,11 +122,9 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
         occupation_stat_val=occupation_spinner.getSelectedItem().toString();
 
     }
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         occupation_stat_val=occupation_spinner.getSelectedItem().toString();
-
     }
 
     @Override
@@ -152,7 +147,6 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
         Random r = new Random();
         i1=r.nextInt(50000-1);
         random_id=String.valueOf(i1);
-
 
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_UP:

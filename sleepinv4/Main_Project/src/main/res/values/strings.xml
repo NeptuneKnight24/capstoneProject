@@ -12,6 +12,11 @@
     <string name="number_inputs">0987654321-</string>
     <string name="email_inputs">!@#$%^*()_+~{}|:,?/.0987654321-QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</string>
     <string name="username_password_inputs">.0987654321-QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm_</string>
+    <string name="google_api_key">AIzaSyA0HyJMLFbzfwuPEiadBnY3JcjoNVhq4qI</string>
+    <string name="Apartment">Apartment</string>
+    <string name="Bedspace">Bedspace</string>
+    <string name="Transient">Transient</string>
+    <string name="Others">Others: </string>
     <string-array name="occupation_status">
         <item>Employed</item>
         <item>Unemployed</item>

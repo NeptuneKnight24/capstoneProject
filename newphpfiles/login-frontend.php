@@ -3,12 +3,10 @@ require "init.php";
 $uname = $_POST["uname"];
 $pword = $_POST["pword"];
 
-
 $sql = "SELECT fname,lname,gender,level,num,email,user_type from tbluser where uname like '".$uname."' and pword like '".$pword."';";
 $result = mysqli_query($con,$sql);
 
 $response = array();
-
 
 if(mysqli_num_rows($result)>0)
 {
@@ -21,7 +19,7 @@ if(mysqli_num_rows($result)>0)
 	$email = $row[5];
 	$type = $row[6];
 	$code = "login success!";
-	array_push($response,array("code"=>$code,"fname"=>$fname, "lname"=>$lname,"gender"=>$gender ,"level"=>$level,"num"=>$num,"email"=>$email,"user_type"=>$type));
+	array_push($response,array("code"=>$code,"fname"=>$fname,"lname"=>$lname,"gender"=>$gender ,"level"=>$level,"num"=>$num,"email"=>$email,"user_type"=>$type));
 	echo json_encode($response);
 }
 else

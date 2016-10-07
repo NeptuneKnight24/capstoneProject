@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends Activity implements View.OnTouchListener{
-    Button btn_login;
+    Button btn_login,btn_map_view;
     EditText user_field,pass_field;
     TextView register_now;
     String username="",password="";
@@ -43,6 +43,8 @@ public class Login extends Activity implements View.OnTouchListener{
         builder = new AlertDialog.Builder(Login.this);
 
         btn_login = (Button)findViewById(R.id.login_btn);
+        btn_map_view = (Button)findViewById(R.id.back_to_map_btn);
+
         user_field = (EditText)findViewById(R.id.et_username);
         pass_field = (EditText)findViewById(R.id.et_password);
 
@@ -52,9 +54,9 @@ public class Login extends Activity implements View.OnTouchListener{
         register_now.setTypeface(face);
 
         btn_login.setOnTouchListener(this);
+        btn_map_view.setOnTouchListener(this);
         register_now.setOnTouchListener(this);
     }
-
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -98,7 +100,7 @@ public class Login extends Activity implements View.OnTouchListener{
                                                 bundle.putString("type",jsonObject.getString("user_type"));
                                                 bundle.putString("num",jsonObject.getString("num"));
                                                 bundle.putString("email",jsonObject.getString("email"));
-                                              //  bundle.putString("uploadpath",jsonObject.getString("upload_path"));
+                                                //bundle.putString("uploadpath",jsonObject.getString("upload_path"));
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
                                                 finish();
@@ -106,8 +108,6 @@ public class Login extends Activity implements View.OnTouchListener{
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-
-
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
@@ -129,7 +129,10 @@ public class Login extends Activity implements View.OnTouchListener{
                         MySingleton.getInstance(Login.this).addToRequestque(stringRequest);
                     }
                 }else if(view.getId() == R.id.tv_text) {
-                    startActivity(new Intent(Login.this,UserLogin.class));
+                    startActivity(new Intent(Login.this,RegistrationLandowner.class));
+                    finish();
+                }else if(view.getId() == R.id.back_to_map_btn) {
+                    startActivity(new Intent(Login.this, GoogleMap.class));
                     finish();
                 }
         }
