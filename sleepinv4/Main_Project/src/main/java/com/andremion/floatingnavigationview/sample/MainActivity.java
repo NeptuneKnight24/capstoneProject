@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         personal_profile = (Button)findViewById(R.id.btn_personal_profile);
         accommodations = (Button)findViewById(R.id.btn_accommodations);
         board_and_lodging = (Button)findViewById(R.id.btn_board_and_lodging);
@@ -90,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     startActivity(intent);
                     finish();
                 }else if(item.getItemId()== R.id.nav_accommodations){
-                   // startActivity(new Intent(MainActivity.this,Accomodations.class));
                     Intent intent = new Intent(MainActivity.this,Accomodations.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     startActivity(intent);
                     finish();
                 }else if(item.getItemId()== R.id.nav_board){
-                   // startActivity(new Intent(MainActivity.this,BoardAndLodging.class));
                     Intent intent = new Intent(MainActivity.this,BoardAndLodging.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
@@ -118,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                   //  bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    finish();
+                }else if(item.getItemId()== R.id.nav_log_out){
+                   startActivity(new Intent(MainActivity.this,Login.class));
                     finish();
                 }
                // Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();

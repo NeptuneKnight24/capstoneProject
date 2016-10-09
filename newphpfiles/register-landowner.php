@@ -6,11 +6,26 @@ $fname = $_POST["fname"];
 $mname = $_POST["midname"];
 $gender = $_POST["gender"];
 $num = $_POST["num"];
-$permitnumber =  $_POST["permit_number"];
-$unittype =  $_POST["unit_type"];
-$availableunits =  $_POST["available_units"];
-$feeperunit =  $_POST["fee_per_unit"];
-$landaddress =  $_POST["email"];
+
+$apartment_name = $_POST["apartment_name"];
+$apartment_permit = $_POST["apartment_permit"];
+$apartment_available_space = $_POST["apartment_available_space"];
+$apartment_fee_per_unit = $_POST["apartment_fee_per_unit"];
+$apartment_location = $_POST["apartment_location"];
+
+$transient_name = $_POST["transient_name"];
+$transient_permit = $_POST["transient_permit"];
+$transient_available_space = $_POST["transient_available_space"];
+$transient_fee_per_unit = $_POST["transient_fee_per_unit"];
+$transient_location = $_POST["transient_location"];
+
+$bedspace_name = $_POST["bedspace_name"];
+$bedspace_permit = $_POST["bedspace_permit"];
+$bedspace_available_space = $_POST["bedspace_available_space"];
+$bedspace_fee_per_unit = $_POST["bedspace_fee_per_unit"];
+$bedspace_location = $_POST["bedspace_location"];
+
+
 $email = $_POST["email"];
 $uname = $_POST["uname"];
 $pword = $_POST["pword"];

@@ -11,12 +11,16 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonalProfile extends AppCompatActivity implements View.OnTouchListener {
     TextView lastname , firstname , usertype, gender,employmentstatus,contactnumber,emailad;
@@ -24,8 +28,8 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
     Button personal_profile,accommodations,board_and_lodging,google_map;
     NavigationView navigationView;
     String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con,imageURL_con;
-    String image_url;
-    NetworkImageView profile_pic;
+    String image_url="http://sleepin.comli.com/uploads/main_logo.png";
+    ImageView profile_pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         setContentView(R.layout.activity_main_personal_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         //textview references
         lastname =(TextView)findViewById(R.id.tv_lastname);
         firstname =(TextView)findViewById(R.id.tv_firstname);
@@ -42,8 +47,9 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         contactnumber =(TextView)findViewById(R.id.tv_contact_number);
         emailad =(TextView)findViewById(R.id.tv_email_address);
 
-        //network image reference
-        profile_pic = (NetworkImageView)findViewById(R.id.iv_profile);
+        // image reference and displaying
+        profile_pic = (CircleImageView)findViewById(R.id.iv_profile);
+        Picasso.with(getApplicationContext()).load(image_url).into(profile_pic);
 
         accommodations = (Button)findViewById(R.id.btn_accomodations_2);
         accommodations.setOnTouchListener(new View.OnTouchListener() {
@@ -96,9 +102,8 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
         contactnumber.setText(bundle.getString("num"));
         emailad.setText(bundle.getString("email"));
 //        image_url = bundle.getString("uploadpath");
-//        ImageLoader imageLoader = MySingletonForImage.getInstance().getImageLoader();
-//        profile_pic.setImageUrl(image_url, imageLoader);
-
+//
+//
 
         fname_con = firstname.getText().toString();
         lname_con = lastname.getText().toString();
@@ -171,6 +176,10 @@ public class PersonalProfile extends AppCompatActivity implements View.OnTouchLi
                     startActivity(intent);
                     finish();
                // startActivity(new Intent(PersonalProfile.this,BoardAndLodging.class));
+                }else if(item.getItemId()== R.id.nav_log_out){
+                    // startActivity(new Intent(MainActivity.this,BoardAndLodging.class));
+                    startActivity(new Intent(PersonalProfile.this,Login.class));
+                    finish();
                 }
                     //  Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();

@@ -53,7 +53,6 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 if(item.getItemId()== R.id.nav_backhome){
-                    //startActivity(new Intent(Accomodations.this,MainActivity.class));
                     Intent intent = new Intent(Accomodations.this,MainActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
@@ -66,7 +65,7 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
 //                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
+                    Accomodations.this.finish();
                 } else if(item.getItemId()== R.id.nav_personal_profile){
                    // startActivity(new Intent(Accomodations.this,PersonalProfile.class));
                     Intent intent = new Intent(Accomodations.this,PersonalProfile.class);
@@ -81,9 +80,8 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
 //                    bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
+                    Accomodations.this.finish();
                 }else if(item.getItemId()== R.id.nav_board){
-                   // startActivity(new Intent(Accomodations.this,BoardAndLodging.class));
                     Intent intent = new Intent(Accomodations.this,BoardAndLodging.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
@@ -94,19 +92,18 @@ public class Accomodations extends AppCompatActivity implements View.OnTouchList
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
 //                    bundle.putString("uploadpath",imageURL_con.toString());
-
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
+                    Accomodations.this.finish();
+                } else if(item.getItemId()== R.id.nav_log_out){
+                    startActivity(new Intent(Accomodations.this,Login.class));
+                    Accomodations.this.finish();
                 }
                 //Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();
                 return true;
             }
         });
-
-
-
     }
 
 

@@ -65,7 +65,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     //bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
+                    BoardAndLodging.this.finish();
                 } else if(item.getItemId()== R.id.nav_accommodations){
                    // startActivity(new Intent(BoardAndLodging.this,Accomodations.class));
                     Intent intent = new Intent(BoardAndLodging.this,Accomodations.class);
@@ -80,7 +80,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                  //   bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
+                    BoardAndLodging.this.finish();
                 }else if(item.getItemId()== R.id.nav_personal_profile){
                    // startActivity(new Intent(BoardAndLodging.this,BoardAndLodging.class));
                     Intent intent = new Intent(BoardAndLodging.this,PersonalProfile.class);
@@ -95,8 +95,12 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                    // bundle.putString("uploadpath",imageURL_con.toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    finish();
-                }
+                    BoardAndLodging.this.finish();
+                } else if(item.getItemId()== R.id.nav_log_out){
+                // startActivity(new Intent(MainActivity.this,BoardAndLodging.class));
+                    startActivity(new Intent(BoardAndLodging.this,Login.class));
+                    BoardAndLodging.this.finish();
+            }
               //  Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();
                 return true;

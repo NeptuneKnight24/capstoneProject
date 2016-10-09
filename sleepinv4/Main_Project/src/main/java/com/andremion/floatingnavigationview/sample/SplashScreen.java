@@ -16,6 +16,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen_layout);
+
         ActivityCompat.requestPermissions(SplashScreen.this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 1);

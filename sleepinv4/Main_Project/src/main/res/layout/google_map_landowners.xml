@@ -8,23 +8,67 @@
     tools:context=".GoogleMap">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
         android:layout_gravity="center">
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/go_back_btn_bg"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:background="@drawable/back_btn_bg"
             android:id="@+id/btn_go_to_reg"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:layout_gravity="center">
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textfield_bg"
+            android:hint="Location"
+            android:maxLength="50"
+            android:id="@+id/et_lastname"
+            android:paddingLeft="@dimen/text_padding"
+            android:digits="@string/name_inputs"
+            android:maxLines="2" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/search_btn_bg"
+                android:id="@+id/search_location"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:layout_gravity="center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/set_location_bg_btn"
+            android:id="@+id/btn_set_location"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="500dp"
         android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="5dp">
 
         <fragment
             android:id="@+id/map"
@@ -32,7 +76,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
-
-
-
 </LinearLayout>

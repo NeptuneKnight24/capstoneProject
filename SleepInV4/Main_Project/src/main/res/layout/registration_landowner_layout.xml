@@ -49,7 +49,7 @@
                                 android:id="@+id/et_lastname"
                                 android:paddingLeft="@dimen/text_padding"
                                 android:digits="@string/name_inputs"
-                                android:maxLines="1" />x
+                                android:maxLines="1" />
                     </LinearLayout>
                    <LinearLayout
                        android:layout_width="wrap_content"
@@ -234,7 +234,7 @@
                                     android:layout_marginLeft="10dp"
                                     android:maxLines="1"
                                     android:paddingLeft="7dp"
-                                    android:maxLength="3"
+                                    android:maxLength="4"
                                     android:digits="@string/number_inputs"
                                     android:background="@drawable/mini_textfield_bg"/>
                             </LinearLayout>
@@ -250,10 +250,22 @@
                             <EditText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:hint="Apartment Name"
+                                android:id="@+id/et_apartment_name"
+                                android:maxLines="1"
+                                android:textSize="10dp"
+                                android:paddingLeft="5dp"
+                                android:maxLength="30"
+                                android:background="@drawable/mini_textfield_bg"/>
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:hint="Location"
                                 android:id="@+id/et_apartment_location"
                                 android:maxLines="1"
                                 android:paddingLeft="5dp"
+                                android:maxLength="50"
+                                android:layout_marginLeft="10dp"
                                 android:background="@drawable/mini_textfield_bg"/>
                             <Button
                                 android:layout_width="90dp"
@@ -312,7 +324,7 @@
                                     android:id="@+id/et_transient_price"
                                     android:maxLines="1"
                                     android:paddingLeft="7dp"
-                                    android:maxLength="3"
+                                    android:maxLength="4"
                                     android:digits="@string/number_inputs"
                                     android:background="@drawable/mini_textfield_bg"/>/>
                                 </LinearLayout>
@@ -329,12 +341,24 @@
                             <EditText
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:hint="Transient Name"
+                                android:id="@+id/et_transient_name"
+                                android:maxLines="1"
+                                android:textSize="10dp"
+                                android:paddingLeft="5dp"
+                                android:maxLength="30"
+                                android:background="@drawable/mini_textfield_bg"/>
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:hint="Location"
                                 android:id="@+id/et_transient_location"
                                 android:maxLines="1"
                                 android:paddingLeft="5dp"
-                                android:background="@drawable/mini_textfield_bg"/>/>
-
+                                android:layout_marginLeft="10dp"
+                                android:maxLength="50"
+                                android:background="@drawable/mini_textfield_bg"/>
                             <Button
                                 android:layout_width="90dp"
                                 android:layout_height="30dp"
@@ -365,23 +389,25 @@
                                         android:layout_height="wrap_content"
                                         android:hint="Building Permit"
                                         android:layout_marginLeft="10dp"
+                                        android:id="@+id/et_bedspace_bp"
                                         android:maxLines="1"
                                         android:paddingLeft="7dp"
                                         android:textSize="13sp"
                                         android:maxLength="1"
                                         android:digits="@string/number_inputs"
                                         android:background="@drawable/mini_textfield_bg"/>/>
-                                    <EditText
-                                        android:layout_width="120dp"
-                                        android:layout_height="wrap_content"
-                                        android:hint="# of units"
-                                        android:id="@+id/et_bedspace_no_units"
-                                        android:layout_marginLeft="10dp"
-                                        android:maxLines="1"
-                                        android:paddingLeft="5dp"
-                                        android:maxLength="3"
-                                        android:digits="@string/number_inputs"
-                                        android:background="@drawable/mini_textfield_bg"/>/>
+
+                                        <EditText
+                                            android:layout_width="120dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint="# of units"
+                                            android:id="@+id/et_bedspace_no_units"
+                                            android:layout_marginLeft="10dp"
+                                            android:maxLines="1"
+                                            android:paddingLeft="5dp"
+                                            android:maxLength="3"
+                                            android:digits="@string/number_inputs"
+                                            android:background="@drawable/mini_textfield_bg"/>/>
                                     <EditText
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -390,7 +416,7 @@
                                         android:id="@+id/et_bedspace_price"
                                         android:maxLines="1"
                                         android:paddingLeft="7dp"
-                                        android:maxLength="3"
+                                        android:maxLength="4"
                                         android:digits="@string/number_inputs"
                                         android:background="@drawable/mini_textfield_bg"/>/>
                                 </LinearLayout>
@@ -404,6 +430,16 @@
                             android:layout_marginTop="5dp"
                             android:gravity="center"
                             android:id="@+id/ll_bedspace_location_group">
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="Bedspace Name"
+                                android:id="@+id/et_bedspace_name"
+                                android:maxLines="1"
+                                android:textSize="10dp"
+                                android:paddingLeft="5dp"
+                                android:maxLength="30"
+                                android:background="@drawable/mini_textfield_bg"/>
 
                             <EditText
                                 android:layout_width="wrap_content"
@@ -412,6 +448,8 @@
                                 android:id="@+id/et_bedspace_location"
                                 android:maxLines="1"
                                 android:paddingLeft="5dp"
+                                android:maxLength="50"
+                                android:layout_marginLeft="10dp"
                                 android:background="@drawable/mini_textfield_bg"/>/>
                             <Button
                                 android:layout_width="90dp"

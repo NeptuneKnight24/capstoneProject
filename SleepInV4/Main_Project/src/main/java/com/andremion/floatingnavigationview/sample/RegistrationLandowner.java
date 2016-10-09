@@ -52,20 +52,35 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
     private RadioGroup radioSexGroup;
     private RadioButton radioButton_male,radioButton_female;
     private ImageView for_profilepic;
-    LinearLayout apartment_group,transient_group,bedspace_group,total_unit_group;
+    LinearLayout apartment_group,transient_group,bedspace_group;
     LinearLayout apartment_location,transient_location,bedspace_location;
     CheckBox apartment,bedspace,transients;
-    TextView back_2_login_tv,landowner_label,perinfo_label,landinfo_label,userinfo_label;//np_test;
+    TextView back_2_login_tv,landowner_label,perinfo_label,landinfo_label,userinfo_label;
     Button register_btn,back_to_choice_btn,select_image;
     Button search_location_apartment,search_location_transient,search_location_bedspace;
     EditText lastname_et,firstname_et,middlename_et,contact_number_et,email_address_et, username_et,password_et,confirm_password_et;
+    EditText apartment_name_et,transient_name_et,bedspace_name_et,apartment_business_permit_et,transient_business_permit_et,bedspace_business_permit_et,
+            apartment_number_of_units_et,transient_number_of_units_et,bedspace_number_of_units_et,apartment_fee_per_unit_et,transient_fee_per_unit_et,bedspace_fee_per_unit_et,
+            apartment_location_et,transient_location_et,bedspace_location_et;
+
+    String control="";
+
     //variables for textfield values
     String lastname_val="",firstname_val="",middlename_val="",contact_number_val="",email_address_val="",
-            username_val="",password_val="", final_password="",unit_type_val="Apartment",business_permit_val="82482",fee_per_unit_val="9000",land_address_val="Dagupan",sex_type_val="",random_id="",
-            unit_numbers_val="",unit_numbers_val_final="";
+            username_val="",password_val="", final_password="",sex_type_val="",random_id="";
+
+    //variables for building_name and building permit
+    String apartment_name_val,transient_name_val,bedspace_name_val,apartment_business_permit_val,transient_business_permit_val,
+            bedspace_business_permit_val;
+
+    //variables for number of units and fee per unit
+    String apartment_number_of_units_val,transient_number_of_units_val,bedspace_number_of_units_val,apartment_fee_per_unit_val,
+            transient_fee_per_unit_val,bedspace_fee_per_unit_val;
+
+    //varaibles for building location
+    String apartment_location_val,transient_location_val,bedspace_location_val;
     private String KEY_IMAGE = "image";
-    private String KEY_NAME = "name";
-   // ScrollView view_container;
+
     AlertDialog.Builder builder;
     String reg_url = "http://sleepin.comli.com/register-landowner.php";
     int i1;
@@ -76,6 +91,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_landowner_layout);
+        builder = new AlertDialog.Builder(RegistrationLandowner.this);
 
         //view references
         apartment_group = (LinearLayout)findViewById(R.id.ll_apartment_group);
@@ -86,7 +102,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         transient_location = (LinearLayout)findViewById(R.id.ll_transient_location_group);
         bedspace_location = (LinearLayout)findViewById(R.id.ll_bedspace_location_group);
 
-       // total_unit_group = (LinearLayout)findViewById(R.id.ll_total_units_group);
 
 
         //set visibility to gone on activity start
@@ -98,10 +113,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         transient_location.setVisibility(View.GONE);
         bedspace_location.setVisibility(View.GONE);
 
-     //   total_unit_group.setVisibility(View.GONE);
-
-
-        //checkbox reference
+        //checkbox reference with actions
         apartment =(CheckBox)findViewById(R.id.cb_apartment);
         apartment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -109,15 +121,9 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 if (isChecked) {
                     apartment_group.setVisibility(View.VISIBLE);
                     apartment_location.setVisibility(View.VISIBLE);
-                  //  total_unit_group.setVisibility(View.VISIBLE);
                 }else{
                     apartment_group.setVisibility(View.GONE);
                     apartment_location.setVisibility(View.GONE);
-//                    if (bedspace.isChecked()|| transients.isChecked()){
-//                        total_unit_group.setVisibility(View.VISIBLE);
-//                    }else{
-//                        total_unit_group.setVisibility(View.GONE);
-//                    }
                 }
             }
         });
@@ -128,15 +134,9 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 if (isChecked) {
                     bedspace_group.setVisibility(View.VISIBLE);
                     bedspace_location.setVisibility(View.VISIBLE);
-                    //total_unit_group.setVisibility(View.VISIBLE);
                 }else{
                     bedspace_group.setVisibility(View.GONE);
                     bedspace_location.setVisibility(View.GONE);
-//                    if (apartment.isChecked()|| transients.isChecked()){
-//                        total_unit_group.setVisibility(View.VISIBLE);
-//                    }else{
-//                        total_unit_group.setVisibility(View.GONE);
-//                    }
                 }
             }
         });
@@ -147,15 +147,9 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 if (isChecked) {
                     transient_group.setVisibility(View.VISIBLE);
                     transient_location.setVisibility(View.VISIBLE);
-                //    total_unit_group.setVisibility(View.VISIBLE);
                 }else{
                    transient_group.setVisibility(View.GONE);
                    transient_location.setVisibility(View.GONE);
-//                    if (apartment.isChecked()|| bedspace.isChecked()){
-//                        total_unit_group.setVisibility(View.VISIBLE);
-//                    }else{
-//                        total_unit_group.setVisibility(View.GONE);
-//                    }
                 }
             }
         });
@@ -176,8 +170,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         //imageview reference
         for_profilepic =(ImageView)findViewById(R.id.iv_profile_picture);
 
-
-        //textfields reference
+        //edit text fields reference
         lastname_et=(EditText)findViewById(R.id.et_lastname);
         firstname_et=(EditText)findViewById(R.id.et_firstname);
         middlename_et=(EditText)findViewById(R.id.et_middlename);
@@ -185,8 +178,28 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         email_address_et=(EditText)findViewById(R.id.et_email_address);
         username_et=(EditText)findViewById(R.id.et_username);
         password_et=(EditText)findViewById(R.id.et_password);
-        builder = new AlertDialog.Builder(RegistrationLandowner.this);
         confirm_password_et=(EditText)findViewById(R.id.et_confirm_password);
+
+        apartment_name_et =(EditText)findViewById(R.id.et_apartment_name);
+        transient_name_et =(EditText)findViewById(R.id.et_transient_name);
+        bedspace_name_et =(EditText)findViewById(R.id.et_bedspace_name);
+
+        apartment_business_permit_et =(EditText)findViewById(R.id.et_apartment_bp);
+        transient_business_permit_et =(EditText)findViewById(R.id.et_transient_bp);
+        bedspace_business_permit_et =(EditText)findViewById(R.id.et_bedspace_bp);
+
+        apartment_number_of_units_et =(EditText)findViewById(R.id.et_apartment_no_units);
+        transient_number_of_units_et =(EditText)findViewById(R.id.et_transient_no_units);
+        bedspace_number_of_units_et =(EditText)findViewById(R.id.et_bedspace_no_units);
+
+        apartment_fee_per_unit_et = (EditText)findViewById(R.id.et_apartment_price);
+        transient_fee_per_unit_et= (EditText)findViewById(R.id.et_bedspace_price);
+        bedspace_fee_per_unit_et = (EditText)findViewById(R.id.et_transient_price);
+
+        apartment_location_et =(EditText)findViewById(R.id.et_apartment_location);
+        transient_location_et =(EditText)findViewById(R.id.et_transient_location);
+        bedspace_location_et =(EditText)findViewById(R.id.et_bedspace_location);
+
 
         //radiobuttons reference
         radioButton_male =(RadioButton)findViewById(R.id.radioMale);
@@ -211,8 +224,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
 
         //radiobuttons reference
         radioSexGroup=(RadioGroup)findViewById(R.id.radioSex);
-        //spinner type
-       // unit_type_spinner= (Spinner)findViewById(R.id.spinner_unit_type);
 
         //textview reference
         back_2_login_tv=(TextView)findViewById(R.id.tv_text_goback);
@@ -221,9 +232,8 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         //set the onTouchListener to perform actions
         back_2_login_tv.setOnTouchListener(this);
 
-
+        //initial value for radiao buttons
         sex_type_val="MALE";
-
 
         //set values for radiobutton variable
         radioSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -238,13 +248,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         });
 
 
-    }
-    //call this to select image from gallery
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
     //set the image to the imageview
     @Override
@@ -263,23 +266,13 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
             }
         }
     }
-    //converting the image to string for uploading
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
-    }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-     //   unit_type_val=unit_type_spinner.getSelectedItem().toString();
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-     //   unit_type_val=unit_type_spinner.getSelectedItem().toString();
     }
 
     @Override
@@ -296,11 +289,108 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         middlename_val = middlename_et.getText().toString();
         contact_number_val = contact_number_et.getText().toString();
         email_address_val= email_address_et.getText().toString();
-        //unit_numbers_val_final = unit_numbers_val.trim().toString();
-        unit_numbers_val_final = "0";
-        username_val= username_et.getText().toString();
-        password_val=password_et.getText().toString();
-        final_password= confirm_password_et.getText().toString();
+
+
+        if (apartment.isChecked()==true && transients.isChecked()==false && bedspace.isChecked()==false)
+        {
+            apartment_name_val = apartment_name_et.getText().toString();
+            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
+            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
+            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
+            apartment_location_val = apartment_location_et.getText().toString();
+            control="1a";
+        }
+        else if (apartment.isChecked()==true && transients.isChecked()==true && bedspace.isChecked()==false)
+        {
+            apartment_name_val = apartment_name_et.getText().toString();
+            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
+            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
+            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
+            apartment_location_val = apartment_location_et.getText().toString();
+
+            transient_name_val = transient_name_et.getText().toString();
+            transient_business_permit_val = transient_business_permit_et.getText().toString();
+            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
+            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
+            transient_location_val = transient_location_et.getText().toString();
+            control="1ab";
+        }
+        else if (apartment.isChecked()==true && transients.isChecked()==true && bedspace.isChecked()==true)
+        {
+
+            apartment_name_val = apartment_name_et.getText().toString();
+            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
+            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
+            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
+            apartment_location_val = apartment_location_et.getText().toString();
+
+            transient_name_val = transient_name_et.getText().toString();
+            transient_business_permit_val = transient_business_permit_et.getText().toString();
+            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
+            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
+            transient_location_val = transient_location_et.getText().toString();
+
+            bedspace_name_val = bedspace_name_et.getText().toString();
+            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
+            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
+            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
+            bedspace_location_val = bedspace_location_et.getText().toString();
+            control="1abc";
+
+        }
+        else if (apartment.isChecked()==false && transients.isChecked()==true && bedspace.isChecked()==false)
+        {
+            transient_name_val = transient_name_et.getText().toString();
+            transient_business_permit_val = transient_business_permit_et.getText().toString();
+            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
+            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
+            transient_location_val = transient_location_et.getText().toString();
+            control="2b";
+        }
+        else if (apartment.isChecked()==false && transients.isChecked()==true && bedspace.isChecked()==true)
+        {
+            transient_name_val = transient_name_et.getText().toString();
+            transient_business_permit_val = transient_business_permit_et.getText().toString();
+            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
+            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
+            transient_location_val = transient_location_et.getText().toString();
+
+            bedspace_name_val = bedspace_name_et.getText().toString();
+            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
+            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
+            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
+            bedspace_location_val = bedspace_location_et.getText().toString();
+            control="2bc";
+        }
+        else if (apartment.isChecked()==false && transients.isChecked()==false && bedspace.isChecked()==true)
+        {
+            bedspace_name_val = bedspace_name_et.getText().toString();
+            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
+            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
+            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
+            bedspace_location_val = bedspace_location_et.getText().toString();
+            control="3c";
+        }
+        else if (apartment.isChecked()==true && transients.isChecked()==false && bedspace.isChecked()==true)
+        {
+            apartment_name_val = apartment_name_et.getText().toString();
+            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
+            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
+            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
+            apartment_location_val = apartment_location_et.getText().toString();
+
+            bedspace_name_val = bedspace_name_et.getText().toString();
+            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
+            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
+            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
+            bedspace_location_val = bedspace_location_et.getText().toString();
+            control="3ac";
+        }
+
+        username_val = username_et.getText().toString();
+        password_val = password_et.getText().toString();
+        final_password = confirm_password_et.getText().toString();
+
 
         sex_type_val.toString();
         Random r = new Random();
@@ -325,6 +415,12 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                     {
                         builder.setTitle("Something went wrong.....");
                         builder.setMessage("Email address INVALID");
+                        email_address_et.requestFocus();
+                        displayAlert("input_error");
+                    } else if (apartment.isChecked()==false && transients.isChecked()==false && bedspace.isChecked()==false)
+                    {
+                        builder.setTitle("Something went wrong.....");
+                        builder.setMessage("Insufficient business information");
                         email_address_et.requestFocus();
                         displayAlert("input_error");
                     }
@@ -374,14 +470,89 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                     params.put("fname",firstname_val);
                                     params.put("midname",middlename_val);
                                     params.put("gender",sex_type_val);
+                                    if(control.toString().contains("1a")) {
+                                        params.put("apartment_name",apartment_name_val);
+                                        params.put("apartment_permit",apartment_business_permit_val);
+                                        params.put("apartment_available_space",apartment_number_of_units_val);
+                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+                                        params.put("apartment_location",apartment_location_val);
+
+                                    }else if (control.toString().contains("1ab")){
+                                        params.put("apartment_name",apartment_name_val);
+                                        params.put("apartment_permit",apartment_business_permit_val);
+                                        params.put("apartment_available_space",apartment_number_of_units_val);
+                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+                                        params.put("apartment_location",apartment_location_val);
+
+                                        params.put("transient_name",transient_name_val);
+                                        params.put("transient_permit",transient_business_permit_val);
+                                        params.put("transient_available_space",transient_number_of_units_val);
+                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+                                        params.put("transient_location",transient_location_val);
+
+                                    }else if (control.toString().contains("1abc")){
+                                        params.put("apartment_name",apartment_name_val);
+                                        params.put("apartment_permit",apartment_business_permit_val);
+                                        params.put("apartment_available_space",apartment_number_of_units_val);
+                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+                                        params.put("apartment_location",apartment_location_val);
+
+                                        params.put("transient_name",transient_name_val);
+                                        params.put("transient_permit",transient_business_permit_val);
+                                        params.put("transient_available_space",transient_number_of_units_val);
+                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+                                        params.put("transient_location",transient_location_val);
+
+                                        params.put("bedspace_name",bedspace_name_val);
+                                        params.put("bedspace_permit",bedspace_business_permit_val);
+                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+                                        params.put("bedspace_location",bedspace_location_val);
+
+                                    }else if(control.toString().contains("2b")){
+
+                                        params.put("transient_name",transient_name_val);
+                                        params.put("transient_permit",transient_business_permit_val);
+                                        params.put("transient_available_space",transient_number_of_units_val);
+                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+                                        params.put("transient_location",transient_location_val);
+                                    }else if(control.toString().contains("2bc")){
+
+                                        params.put("transient_name",transient_name_val);
+                                        params.put("transient_permit",transient_business_permit_val);
+                                        params.put("transient_available_space",transient_number_of_units_val);
+                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+                                        params.put("transient_location",transient_location_val);
+
+                                        params.put("bedspace_name",bedspace_name_val);
+                                        params.put("bedspace_permit",bedspace_business_permit_val);
+                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+                                        params.put("bedspace_location",bedspace_location_val);
+
+                                    }else if(control.toString().contains("3c")){
+                                        params.put("bedspace_name",bedspace_name_val);
+                                        params.put("bedspace_permit",bedspace_business_permit_val);
+                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+                                        params.put("bedspace_location",bedspace_location_val);
+
+                                    }else if(control.toString().contains("3ac")){
+                                        params.put("bedspace_name",bedspace_name_val);
+                                        params.put("bedspace_permit",bedspace_business_permit_val);
+                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+                                        params.put("bedspace_location",bedspace_location_val);
+
+                                        params.put("apartment_name",apartment_name_val);
+                                        params.put("apartment_permit",apartment_business_permit_val);
+                                        params.put("apartment_available_space",apartment_number_of_units_val);
+                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+                                        params.put("apartment_location",apartment_location_val);
+                                    }
+
                                     params.put("num",contact_number_val);
                                     params.put("email",email_address_val);
-                                    params.put("permit_number",business_permit_val);
-                                  // params.put("permit_number",business_permit_val);
-                                    params.put("unit_type",unit_type_val);
-                                    params.put("available_units",unit_numbers_val_final);
-                                    params.put("fee_per_unit",fee_per_unit_val);
-                                    params.put("land_address",land_address_val);
                                     params.put("uname",username_val);
                                     params.put("pword",final_password);
                                     params.put(KEY_IMAGE, image);
@@ -415,8 +586,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 }else if (view.getId() == R.id.btn_search_location_bedspace) {
                     startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
                     Toast.makeText(this, "Get Location is still in beta and will not work", Toast.LENGTH_SHORT).show();
-
-
                 }
 
         }
@@ -450,5 +619,20 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    //call this to select image from gallery
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    //converting the image to string for uploading
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 }

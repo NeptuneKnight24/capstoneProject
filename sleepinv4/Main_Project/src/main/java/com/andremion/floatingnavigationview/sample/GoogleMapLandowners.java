@@ -19,8 +19,6 @@ Button go_back;
         go_back=(Button)findViewById(R.id.btn_go_to_reg);
         go_back.setOnTouchListener(this);
 
-
-
     }
 
     @Override
