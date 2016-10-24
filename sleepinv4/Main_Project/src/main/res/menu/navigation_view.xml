@@ -19,10 +19,6 @@
             android:icon="@drawable/accomodations_ic"
             android:title="@string/menu_item_acc"/>
         <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/googlemap_ic"
-            android:title="@string/menu_item_map"/>
-        <item
             android:id="@+id/nav_log_out"
             android:icon="@drawable/log_out_ic"
             android:title="@string/menu_item_log_out"/>

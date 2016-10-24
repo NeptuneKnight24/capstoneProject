@@ -28,8 +28,6 @@ public class SplashScreen extends AppCompatActivity {
         ImageView cloudfive = (ImageView) findViewById(R.id.iv_cloud_five);
         ImageView cloudsix = (ImageView) findViewById(R.id.iv_cloud_six);
 
-//        ImageView upang_logo = (ImageView) findViewById(R.id.iv_upang_logo);
-//        ImageView cite_logo = (ImageView) findViewById(R.id.iv_cite_logo);
 
         Animation startFadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_animation);
         fadeOutImage.startAnimation(startFadeInAnimation);

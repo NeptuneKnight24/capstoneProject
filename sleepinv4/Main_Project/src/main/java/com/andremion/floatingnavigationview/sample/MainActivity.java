@@ -1,9 +1,13 @@
 package com.andremion.floatingnavigationview.sample;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,9 +25,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private FloatingNavigationView mFloatingNavigationView;
     Spinner occupation_spinner;
-    Button personal_profile,accommodations,board_and_lodging,google_map;
-    TextView personal_profile_text,accommodations_text,board_and_lodging_text,google_map_text,user_name;
-    public static  String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con,imageURL_con;
+    AlertDialog.Builder builder;
+
+    Button personal_profile,accommodations,board_and_lodging,show_info;
+    TextView personal_profile_text,accommodations_text,board_and_lodging_text,user_name;
+    String fname_con,lname_con,gender_con,type_con,num_con,email_con,imageURL_con,
+            building_name_con,building_available_units_con,building_fee_per_unit_con,building_location_con;
+    String help_message="Here are some clear descriptions\n" + "\n"+
+            "TAP on the PERSONAL PROFILE button to view your account details.\n"+ "\n"+
+            "TAP on the BOARD AND LODGING button to view the map and fellow registered landowners.\n"+ "\n"+
+            "TAP on the ACCOMMODATIONS button to edit your account details or add preview images for your apartment.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,32 +43,42 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        builder = new AlertDialog.Builder(MainActivity.this);
+
+
         personal_profile = (Button)findViewById(R.id.btn_personal_profile);
         accommodations = (Button)findViewById(R.id.btn_accommodations);
         board_and_lodging = (Button)findViewById(R.id.btn_board_and_lodging);
-        google_map = (Button)findViewById(R.id.btn_google_map);
+        show_info = (Button)findViewById(R.id.btn_info);
+
+
 
         personal_profile.setOnTouchListener(this);
         accommodations.setOnTouchListener(this);
         board_and_lodging.setOnTouchListener(this);
-        google_map.setOnTouchListener(this);
+        show_info.setOnTouchListener(this);
+
 
         personal_profile_text = (TextView) findViewById(R.id.tv_pp);
         accommodations_text = (TextView) findViewById(R.id.tv_accom);
         board_and_lodging_text = (TextView) findViewById(R.id.tv_bandl);
-        google_map_text = (TextView) findViewById(R.id.tv_ggmap);
         user_name=(TextView)findViewById(R.id.tv_username);
 
         Bundle bundle = getIntent().getExtras();
         user_name.setText(bundle.getString("fname"));
         fname_con = bundle.getString("fname");
         lname_con = bundle.getString("lname");
-        level_con = bundle.getString("level");
         gender_con = bundle.getString("gender");
         type_con = bundle.getString("type");
         num_con = bundle.getString("num");
         email_con = bundle.getString("email");
-    //    imageURL_con = bundle.getString("uploadpath");
+        imageURL_con = bundle.getString("uploadpath");
+        building_name_con = bundle.getString("apartmentname");
+        building_available_units_con = bundle.getString("apartmentunits");
+        building_fee_per_unit_con = bundle.getString("apartmentfee");
+        building_location_con= bundle.getString("apartmentlocation");
+
+
 
 
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
@@ -79,13 +100,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                    //bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }else if(item.getItemId()== R.id.nav_accommodations){
@@ -93,13 +118,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                  //  bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }else if(item.getItemId()== R.id.nav_board){
@@ -107,18 +136,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                  //  bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }else if(item.getItemId()== R.id.nav_log_out){
-                   startActivity(new Intent(MainActivity.this,Login.class));
-                    finish();
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
                // Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();
@@ -148,13 +182,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                   // bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 } else if (view.getId() == R.id.btn_accommodations) {
@@ -163,13 +201,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                  //  bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 } else if (view.getId() == R.id.btn_board_and_lodging) {
@@ -178,20 +220,37 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                   // bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                     //startActivity(new Intent(MainActivity.this, BoardAndLodging.class));
-                } else if (view.getId() == R.id.btn_google_map) {
-                    Toast.makeText(this, google_map_text.getText(), Toast.LENGTH_SHORT).show();
-                }
+                }else if(view.getId() == R.id.btn_info) {
+                    builder.setTitle("What does those buttons do?");
+                    displayAlert(help_message);
+               }
         }
         return true;
     }
+    private void displayAlert(final String message) {
+        builder.setMessage(message);
+        builder.setPositiveButton("THANKS!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }

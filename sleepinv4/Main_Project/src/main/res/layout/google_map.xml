@@ -11,34 +11,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="10dp"
         android:layout_gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Go to:"
-            android:textSize="25dp"
+            android:textSize="15dp"
             android:layout_gravity="center"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
             android:background="@drawable/landowner_hub_btn_bg"
             android:id="@+id/btn_go_to_main"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:layout_gravity="center">
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textfield_bg"
+            android:hint="Location"
+            android:maxLength="100"
+            android:id="@+id/et_search_location_user"
+            android:paddingLeft="@dimen/text_padding"
+            android:digits="@string/name_inputs"
+            android:maxLines="2" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/search_btn_bg"
+                android:id="@+id/btn_search_location_user"/>
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
-
         <fragment
-            android:id="@+id/map"
-            android:name="com.andremion.floatingnavigationview.sample.MapFragment"
+            android:id="@+id/mapB"
+            class="com.andremion.floatingnavigationview.sample.MapFragmentViewOnly"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
-
 
 
 </LinearLayout>

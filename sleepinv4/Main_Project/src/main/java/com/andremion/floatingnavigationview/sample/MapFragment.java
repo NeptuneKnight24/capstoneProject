@@ -1,10 +1,15 @@
 package com.andremion.floatingnavigationview.sample;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -12,9 +17,13 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
@@ -28,9 +37,11 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         GoogleMap.OnMapLongClickListener,
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener {
+
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
 
+    private final String message="";
     private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
             GoogleMap.MAP_TYPE_NORMAL,
             GoogleMap.MAP_TYPE_HYBRID,
@@ -38,7 +49,8 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
             GoogleMap.MAP_TYPE_NONE };
     private int curMapTypeIndex = 1;
     AlertDialog.Builder builder;
-
+    String data="";
+    EditText search_location;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -113,20 +125,72 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     @Override
     public void onInfoWindowClick(Marker marker) {
 
+
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
+        MarkerOptions options = new MarkerOptions().position( latLng );
+        options.title( getAddressFromLatLng( latLng ) );
+        options.icon( BitmapDescriptorFactory.defaultMarker() );
+        getMap().addMarker( options );
 
     }
 
     @Override
     public void onMapLongClick(LatLng latLng) {
+        MarkerOptions options = new MarkerOptions().position( latLng );
+        options.title( getAddressFromLatLng( latLng ));
+        options.icon( BitmapDescriptorFactory.fromBitmap(
+                BitmapFactory.decodeResource( getResources(),
+                        R.mipmap.launcher_logo ) ) );
+
+        getMap().addMarker( options );
+
+
+
+    }
+    private String getAddressFromLatLng( LatLng latLng ) {
+        Geocoder geocoder = new Geocoder( getActivity() );
+
+        String address = "";
+        String city ="";
+        String sub_admin_area="";
+        String locale="";
+        String full_address="";
+
+        try {
+            address = geocoder
+                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
+                    .get( 0 ).getAddressLine( 0 );
+            city = geocoder
+                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
+                    .get( 0 ).getLocality( );
+            locale = geocoder
+                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
+                    .get( 0 ).getSubLocality();
+            sub_admin_area = geocoder
+                    .getFromLocation( latLng.latitude, latLng.longitude, 1 )
+                    .get( 0 ).getSubAdminArea( );
+
+
+            full_address= address +","+city+","+sub_admin_area+","+locale;
+
+
+        } catch (IOException e ) {
+        }
+        CustomMessageEvent event = new CustomMessageEvent();
+        event.setCustomMessage(full_address);
+        EventBus.getDefault().post(event);
+        return full_address;
 
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        return false;
+        marker.showInfoWindow();
+        return true;
     }
+
+
 }
