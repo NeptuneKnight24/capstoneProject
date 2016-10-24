@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -38,6 +39,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,6 +94,9 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_landowner_layout);
         builder = new AlertDialog.Builder(RegistrationLandowner.this);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+
+
 
         //view references
         apartment_group = (LinearLayout)findViewById(R.id.ll_apartment_group);
@@ -102,8 +107,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         transient_location = (LinearLayout)findViewById(R.id.ll_transient_location_group);
         bedspace_location = (LinearLayout)findViewById(R.id.ll_bedspace_location_group);
 
-
-
         //set visibility to gone on activity start
         apartment_group.setVisibility(View.GONE);
         transient_group.setVisibility(View.GONE);
@@ -112,6 +115,8 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         apartment_location.setVisibility(View.GONE);
         transient_location.setVisibility(View.GONE);
         bedspace_location.setVisibility(View.GONE);
+
+
 
         //checkbox reference with actions
         apartment =(CheckBox)findViewById(R.id.cb_apartment);
@@ -128,6 +133,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
             }
         });
         bedspace =(CheckBox)findViewById(R.id.cb_bedspace);
+        bedspace.setVisibility(View.GONE);
         bedspace.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -141,6 +147,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
             }
         });
         transients =(CheckBox)findViewById(R.id.cb_transients);
+        transients.setVisibility(View.GONE);
         transients.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -197,8 +204,10 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         bedspace_fee_per_unit_et = (EditText)findViewById(R.id.et_transient_price);
 
         apartment_location_et =(EditText)findViewById(R.id.et_apartment_location);
+        apartment_location_et.setKeyListener(null);
         transient_location_et =(EditText)findViewById(R.id.et_transient_location);
         bedspace_location_et =(EditText)findViewById(R.id.et_bedspace_location);
+
 
 
         //radiobuttons reference
@@ -247,9 +256,32 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
             }
         });
 
+        //shared preferences value
+        firstname_et.setText(pref.getString("firstname",null));
+        lastname_et.setText(pref.getString("lastname",null));
+        middlename_et.setText(pref.getString("middlename",null));
+        contact_number_et.setText(pref.getString("contact",null));
+        email_address_et.setText(pref.getString("email",null));
+        apartment_business_permit_et.setText(pref.getString("buildingpermit",null));
+        apartment_name_et.setText(pref.getString("buildingname",null));
+        apartment_number_of_units_et.setText(pref.getString("buildingunits",null));
+        apartment_fee_per_unit_et.setText(pref.getString("unitprice",null));
+        username_et.setText(pref.getString("username",null));
+        password_et.setText(pref.getString("password",null));
+        confirm_password_et.setText(pref.getString("password",null));
+        apartment_location_et.setText(pref.getString("location",null));
+
+
+
+
+
+
+
+
 
     }
-    //set the image to the imageview
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -317,7 +349,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         }
         else if (apartment.isChecked()==true && transients.isChecked()==true && bedspace.isChecked()==true)
         {
-
             apartment_name_val = apartment_name_et.getText().toString();
             apartment_business_permit_val = apartment_business_permit_et.getText().toString();
             apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
@@ -457,7 +488,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                     loading.dismiss();
                                     Toast.makeText(RegistrationLandowner.this,"Connection Error",Toast.LENGTH_SHORT).show();
                                     error.printStackTrace();
-
                                 }
                             }){
                                 @Override
@@ -466,106 +496,108 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                     //Converting Bitmap to String
                                     String image = getStringImage(bitmap);
                                     params.put("uid",random_id);
-                                    params.put("lname",lastname_val);
-                                    params.put("fname",firstname_val);
-                                    params.put("midname",middlename_val);
-                                    params.put("gender",sex_type_val);
-                                    if(control.toString().contains("1a")) {
-                                        params.put("apartment_name",apartment_name_val);
-                                        params.put("apartment_permit",apartment_business_permit_val);
-                                        params.put("apartment_available_space",apartment_number_of_units_val);
-                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-                                        params.put("apartment_location",apartment_location_val);
+                                    params.put("lname",lastname_val.toUpperCase());
+                                    params.put("fname",firstname_val.toUpperCase());
+                                    params.put("midname",middlename_val.toUpperCase());
+                                    params.put("gender",sex_type_val.toUpperCase());
+//                                    if(control.toString().contains("1a")) {
+                                    params.put("apartment_name",apartment_name_val.toUpperCase());
+                                    params.put("apartment_permit",apartment_business_permit_val);
+                                    params.put("apartment_available_space",apartment_number_of_units_val);
+                                    params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+                                    params.put("apartment_location",apartment_location_val.toUpperCase());
 
-                                    }else if (control.toString().contains("1ab")){
-                                        params.put("apartment_name",apartment_name_val);
-                                        params.put("apartment_permit",apartment_business_permit_val);
-                                        params.put("apartment_available_space",apartment_number_of_units_val);
-                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-                                        params.put("apartment_location",apartment_location_val);
+//                                    }else if (control.toString().contains("1ab")){
+//                                        params.put("apartment_name",apartment_name_val);
+//                                        params.put("apartment_permit",apartment_business_permit_val);
+//                                        params.put("apartment_available_space",apartment_number_of_units_val);
+//                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+//                                        params.put("apartment_location",apartment_location_val);
+//
+//                                        params.put("transient_name",transient_name_val);
+//                                        params.put("transient_permit",transient_business_permit_val);
+//                                        params.put("transient_available_space",transient_number_of_units_val);
+//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+//                                        params.put("transient_location",transient_location_val);
+//
+//                                    }else if (control.toString().contains("1abc")){
+//                                        params.put("apartment_name",apartment_name_val);
+//                                        params.put("apartment_permit",apartment_business_permit_val);
+//                                        params.put("apartment_available_space",apartment_number_of_units_val);
+//                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+//                                        params.put("apartment_location",apartment_location_val);
+//
+//                                        params.put("transient_name",transient_name_val);
+//                                        params.put("transient_permit",transient_business_permit_val);
+//                                        params.put("transient_available_space",transient_number_of_units_val);
+//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+//                                        params.put("transient_location",transient_location_val);
+//
+//                                        params.put("bedspace_name",bedspace_name_val);
+//                                        params.put("bedspace_permit",bedspace_business_permit_val);
+//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+//                                        params.put("bedspace_location",bedspace_location_val);
+//
+//                                    }else if(control.toString().contains("2b")){
+//
+//                                        params.put("transient_name",transient_name_val);
+//                                        params.put("transient_permit",transient_business_permit_val);
+//                                        params.put("transient_available_space",transient_number_of_units_val);
+//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+//                                        params.put("transient_location",transient_location_val);
+//                                    }else if(control.toString().contains("2bc")){
+//
+//                                        params.put("transient_name",transient_name_val);
+//                                        params.put("transient_permit",transient_business_permit_val);
+//                                        params.put("transient_available_space",transient_number_of_units_val);
+//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
+//                                        params.put("transient_location",transient_location_val);
+//
+//                                        params.put("bedspace_name",bedspace_name_val);
+//                                        params.put("bedspace_permit",bedspace_business_permit_val);
+//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+//                                        params.put("bedspace_location",bedspace_location_val);
+//
+//                                    }else if(control.toString().contains("3c")){
+//                                        params.put("bedspace_name",bedspace_name_val);
+//                                        params.put("bedspace_permit",bedspace_business_permit_val);
+//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+//                                        params.put("bedspace_location",bedspace_location_val);
+//
+//                                    }else if(control.toString().contains("3ac")){
+//                                        params.put("bedspace_name",bedspace_name_val);
+//                                        params.put("bedspace_permit",bedspace_business_permit_val);
+//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
+//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
+//                                        params.put("bedspace_location",bedspace_location_val);
+//
+//                                        params.put("apartment_name",apartment_name_val);
+//                                        params.put("apartment_permit",apartment_business_permit_val);
+//                                        params.put("apartment_available_space",apartment_number_of_units_val);
+//                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
+//                                        params.put("apartment_location",apartment_location_val);
+//                                    }
 
-                                        params.put("transient_name",transient_name_val);
-                                        params.put("transient_permit",transient_business_permit_val);
-                                        params.put("transient_available_space",transient_number_of_units_val);
-                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-                                        params.put("transient_location",transient_location_val);
-
-                                    }else if (control.toString().contains("1abc")){
-                                        params.put("apartment_name",apartment_name_val);
-                                        params.put("apartment_permit",apartment_business_permit_val);
-                                        params.put("apartment_available_space",apartment_number_of_units_val);
-                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-                                        params.put("apartment_location",apartment_location_val);
-
-                                        params.put("transient_name",transient_name_val);
-                                        params.put("transient_permit",transient_business_permit_val);
-                                        params.put("transient_available_space",transient_number_of_units_val);
-                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-                                        params.put("transient_location",transient_location_val);
-
-                                        params.put("bedspace_name",bedspace_name_val);
-                                        params.put("bedspace_permit",bedspace_business_permit_val);
-                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-                                        params.put("bedspace_location",bedspace_location_val);
-
-                                    }else if(control.toString().contains("2b")){
-
-                                        params.put("transient_name",transient_name_val);
-                                        params.put("transient_permit",transient_business_permit_val);
-                                        params.put("transient_available_space",transient_number_of_units_val);
-                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-                                        params.put("transient_location",transient_location_val);
-                                    }else if(control.toString().contains("2bc")){
-
-                                        params.put("transient_name",transient_name_val);
-                                        params.put("transient_permit",transient_business_permit_val);
-                                        params.put("transient_available_space",transient_number_of_units_val);
-                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-                                        params.put("transient_location",transient_location_val);
-
-                                        params.put("bedspace_name",bedspace_name_val);
-                                        params.put("bedspace_permit",bedspace_business_permit_val);
-                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-                                        params.put("bedspace_location",bedspace_location_val);
-
-                                    }else if(control.toString().contains("3c")){
-                                        params.put("bedspace_name",bedspace_name_val);
-                                        params.put("bedspace_permit",bedspace_business_permit_val);
-                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-                                        params.put("bedspace_location",bedspace_location_val);
-
-                                    }else if(control.toString().contains("3ac")){
-                                        params.put("bedspace_name",bedspace_name_val);
-                                        params.put("bedspace_permit",bedspace_business_permit_val);
-                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-                                        params.put("bedspace_location",bedspace_location_val);
-
-                                        params.put("apartment_name",apartment_name_val);
-                                        params.put("apartment_permit",apartment_business_permit_val);
-                                        params.put("apartment_available_space",apartment_number_of_units_val);
-                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-                                        params.put("apartment_location",apartment_location_val);
-                                    }
-
-                                    params.put("num",contact_number_val);
-                                    params.put("email",email_address_val);
+                                    params.put("num",contact_number_val.toUpperCase());
+                                    params.put("email",email_address_val.toUpperCase());
                                     params.put("uname",username_val);
                                     params.put("pword",final_password);
                                     params.put(KEY_IMAGE, image);
                                     return params;
+
                                 }
                             };
                             MySingleton.getInstance(RegistrationLandowner.this).addToRequestque(stringRequest);
-                          /* Toast.makeText(this, ""+lastname_val+"\n"+firstname_val+"\n"+sex_type_val+"\n"+occupation_stat_val+"\n"+contact_number_val+
-                                       ""+email_address_val+"\n"+username_val+"\n"+password_val+"\n"+final_password
-                                      , Toast.LENGTH_SHORT).show();*/
+//                           Toast.makeText(this, ""+lastname_val+"\n"+firstname_val+"\n"+middlename_val+"\n"+sex_type_val+"\n"+contact_number_val+
+//                                       ""+email_address_val+"\n"+username_val+"\n"+password_val+"\n"+final_password+"\n"+apartment_name_val
+//                                           +"\n"+apartment_business_permit_val+"\n"+apartment_fee_per_unit_val+"\n"+apartment_number_of_units_val
+//                                           +"\n"+apartment_location_val
+//                                      , Toast.LENGTH_SHORT).show();
                         }
                     }
-
                 }else if (view.getId() == R.id.tv_text_goback) {
                     //perform action - go to layout
                     startActivity(new Intent(RegistrationLandowner.this,Login.class));
@@ -573,23 +605,47 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 }else if (view.getId() == R.id.btn_insert_image) {
                     //perform action - select an image from the gallery
                     showFileChooser();
-
                 }else if (view.getId() == R.id.btn_back_to_choice){
                     startActivity(new Intent(RegistrationLandowner.this,Login.class));
                     finish();
                 }else if (view.getId() == R.id.btn_search_location_apartment){
-                    Toast.makeText(this, "Get Location is still in beta and will not work", Toast.LENGTH_SHORT).show();
+                    apartment_location_et.setText("");
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("lastname",lastname_val);
+                    editor.putString("firstname",firstname_val);
+                    editor.putString("middlename",middlename_val);
+                    editor.putString("contact",contact_number_val);
+                    editor.putString("email",email_address_val);
+                    editor.putString("buildingpermit",apartment_business_permit_val);
+                    editor.putString("buildingname",apartment_name_val);
+                    editor.putString("buildingunits",apartment_number_of_units_val);
+                    editor.putString("unitprice",apartment_fee_per_unit_val);
+                    editor.putString("username",username_val);
+                    editor.putString("password",password_val);
+                    editor.putString("location",apartment_location_val);
+                    editor.putString("finalpassword",final_password);
+                    editor.commit();
                     startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
-                }else if (view.getId() == R.id.btn_search_location_transient){
-                    startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
-                    Toast.makeText(this, "Get Location is still in beta and will not work", Toast.LENGTH_SHORT).show();
-                }else if (view.getId() == R.id.btn_search_location_bedspace) {
-                    startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
-                    Toast.makeText(this, "Get Location is still in beta and will not work", Toast.LENGTH_SHORT).show();
-                }
+                    finish();
 
+                }else if (view.getId() == R.id.btn_search_location_transient){
+                   // startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
+                    Intent i = new Intent(RegistrationLandowner.this, GoogleMapLandowners.class);
+                    startActivity(i);
+                }else if (view.getId() == R.id.btn_search_location_bedspace) {
+                 //   startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
+                    Intent i = new Intent(RegistrationLandowner.this, GoogleMapLandowners.class);
+                    startActivity(i);
+                }
         }
         return true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
     }
 
     private void displayAlert(final String code) {
@@ -603,6 +659,8 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 else if (code.equals("reg_success"))
                 {
                     startActivity(new Intent(RegistrationLandowner.this,Login.class));
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                    getSharedPreferences("MyPref",0).edit().clear().commit();
                     finish();
                 }
                 else if (code.equals("reg_failed"))

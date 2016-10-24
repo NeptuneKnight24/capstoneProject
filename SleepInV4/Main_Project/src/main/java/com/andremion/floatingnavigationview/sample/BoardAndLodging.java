@@ -17,7 +17,9 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
 
     private FloatingNavigationView mFloatingNavigationView;
     NavigationView navigationView;
-    String fname_con,lname_con,level_con,gender_con,type_con,num_con,email_con,imageURL_con;
+    String fname_con,lname_con,gender_con,type_con,num_con,email_con,imageURL_con,
+            building_name_con,building_available_units_con,building_fee_per_unit_con,building_location_con;
+
 
 
 
@@ -31,12 +33,16 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
         Bundle bundle = getIntent().getExtras();
         fname_con = bundle.getString("fname");
         lname_con = bundle.getString("lname");
-        level_con = bundle.getString("level");
         gender_con = bundle.getString("gender");
         type_con = bundle.getString("type");
         num_con = bundle.getString("num");
         email_con = bundle.getString("email");
-        //imageURL_con= bundle.getString("uploadpath");
+        imageURL_con= bundle.getString("uploadpath");
+        building_name_con= bundle.getString("apartmentname");
+        building_available_units_con = bundle.getString("apartmentunits");
+        building_fee_per_unit_con = bundle.getString("apartmentfee");
+        building_location_con= bundle.getString("apartmentlocation");
+
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
         mFloatingNavigationView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +63,17 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                    //bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     BoardAndLodging.this.finish();
                 } else if(item.getItemId()== R.id.nav_accommodations){
@@ -72,13 +82,17 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                 //   bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     BoardAndLodging.this.finish();
                 }else if(item.getItemId()== R.id.nav_personal_profile){
@@ -87,19 +101,23 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
                     bundle.putString("lname",lname_con.toString());
-                    bundle.putString("level",level_con.toString());
                     bundle.putString("gender",gender_con.toString());
                     bundle.putString("type",type_con.toString());
                     bundle.putString("num",num_con.toString());
                     bundle.putString("email",email_con.toString());
-                   // bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("uploadpath",imageURL_con.toString());
+                    bundle.putString("apartmentname",building_name_con.toString());
+                    bundle.putString("apartmentunits",building_available_units_con.toString());
+                    bundle.putString("apartmentfee",building_fee_per_unit_con.toString());
+                    bundle.putString("apartmentlocation",building_location_con.toString());
                     intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     BoardAndLodging.this.finish();
                 } else if(item.getItemId()== R.id.nav_log_out){
-                // startActivity(new Intent(MainActivity.this,BoardAndLodging.class));
-                    startActivity(new Intent(BoardAndLodging.this,Login.class));
-                    BoardAndLodging.this.finish();
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
             }
               //  Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();

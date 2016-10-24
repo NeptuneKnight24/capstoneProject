@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,10 +32,11 @@ import java.util.Map;
 public class Login extends Activity implements View.OnTouchListener{
     Button btn_login,btn_map_view;
     EditText user_field,pass_field;
-    TextView register_now;
+    TextView register_now,help_instructions;
     String username="",password="";
     AlertDialog.Builder builder;
     String login_url = "http://sleepin.comli.com/login-frontend.php";
+    String help_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +55,18 @@ public class Login extends Activity implements View.OnTouchListener{
         register_now.setPaintFlags(register_now.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         register_now.setTypeface(face);
 
+        help_instructions = (TextView)findViewById(R.id.tv_help_instuctions);
+        help_instructions.setPaintFlags(help_instructions.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        help_instructions.setTypeface(face);
+
+
+        help_message="AHOY! Landowner and welcome to Sleep In!\n" +
+                "In order to use the app you need to have an account, if you already one that's AWESOME! Just enter " +
+                "your USERNAME and PASSWORD then you're good go. ";
+
         btn_login.setOnTouchListener(this);
         btn_map_view.setOnTouchListener(this);
+        help_instructions.setOnTouchListener(this);
         register_now.setOnTouchListener(this);
     }
 
@@ -95,12 +107,15 @@ public class Login extends Activity implements View.OnTouchListener{
                                                 Bundle bundle = new Bundle();
                                                 bundle.putString("fname",jsonObject.getString("fname"));
                                                 bundle.putString("lname",jsonObject.getString("lname"));
-                                                bundle.putString("level",jsonObject.getString("level"));
                                                 bundle.putString("gender",jsonObject.getString("gender"));
                                                 bundle.putString("type",jsonObject.getString("user_type"));
                                                 bundle.putString("num",jsonObject.getString("num"));
                                                 bundle.putString("email",jsonObject.getString("email"));
-                                                //bundle.putString("uploadpath",jsonObject.getString("upload_path"));
+                                                bundle.putString("uploadpath",jsonObject.getString("upload_path"));
+                                                bundle.putString("apartmentname",jsonObject.getString("apartment_name"));
+                                                bundle.putString("apartmentunits",jsonObject.getString("apartment_available_units"));
+                                                bundle.putString("apartmentfee",jsonObject.getString("apartment_fee_per_unit"));
+                                                bundle.putString("apartmentlocation",jsonObject.getString("apartment_location"));
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
                                                 finish();
@@ -134,6 +149,9 @@ public class Login extends Activity implements View.OnTouchListener{
                 }else if(view.getId() == R.id.back_to_map_btn) {
                     startActivity(new Intent(Login.this, GoogleMap.class));
                     finish();
+                }else if(view.getId() == R.id.tv_help_instuctions) {
+                    builder.setTitle("HELP");
+                    displayAlert(help_message);
                 }
         }
         return true;

@@ -73,8 +73,6 @@ public class UserLogin extends Activity implements View.OnTouchListener{
               }
             }
         });
-
-
     }
 
 
