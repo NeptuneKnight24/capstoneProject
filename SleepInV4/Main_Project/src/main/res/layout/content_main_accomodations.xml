@@ -30,7 +30,6 @@
                         android:layout_marginLeft="5dp"
                         android:layout_height="140dp"
                         android:id="@+id/iv_apartment_dp" />
-
                     <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -109,7 +108,7 @@
                                     android:hint="Apartment Name"
                                     android:id="@+id/et_modify_apartment_name"
                                     android:maxLines="1"
-                                    android:textSize="20dp"
+                                    android:textSize="15dp"
                                     android:paddingLeft="5dp"
                                     android:maxLength="30"
                                     android:background="@drawable/textfield_bg"/>
@@ -124,22 +123,42 @@
                                     android:digits="@string/number_inputs"
                                     android:paddingLeft="5dp"
                                     android:maxLength="3"
-                                    android:background="@drawable/mini_textfield_bg"/>
+                                    android:textSize="15dp"
 
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="Price"
-                            android:id="@+id/et_modify_apartment_price"
-                            android:maxLines="1"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="7dp"
-                            android:maxLength="4"
-                            android:digits="@string/number_inputs"
-                            android:background="@drawable/mini_textfield_bg"/>
+                                    android:background="@drawable/mini_textfield_bg"/>
+                                <EditText
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Price"
+                                    android:id="@+id/et_modify_apartment_price"
+                                    android:maxLines="1"
+                                    android:layout_marginTop="5dp"
+                                    android:paddingLeft="7dp"
+                                    android:maxLength="4"
+                                    android:textSize="15dp"
+                                    android:digits="@string/number_inputs"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@drawable/mini_textfield_bg"/>
+                                <Button
+                                    android:layout_width="190dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:id="@+id/btn_change_building_picture"
+                                    android:background="@drawable/change_building_image_btn_bg"/>
+
+                                <Button
+                                    android:layout_width="150dp"
+                                    android:layout_height="30dp"
+                                    android:id="@+id/btn_upload_building_picture"
+                                    android:background="@drawable/upload_image_btn_bg"/>
+                                <Button
+                                    android:layout_width="150dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="5dp"
+                                    android:id="@+id/btn_cancel_building_upload_picture"
+                                    android:background="@drawable/cancel_image_btn_bg"/>
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -176,7 +195,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="15sp"
+                                    android:textSize="12sp"
                                     android:id="@+id/tv_landowner_firstname"
                                     android:paddingTop="5dp"
                                     android:text="Landowner Name" />
@@ -189,7 +208,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="15sp"
+                                    android:textSize="12sp"
                                     android:id="@+id/tv_landowner_lastname"
                                     android:paddingTop="5dp"
                                     android:text="Landowner Name" />
@@ -228,6 +247,7 @@
                                 android:maxLength="20"
                                 android:id="@+id/et_modify_lastname"
                                 android:paddingLeft="@dimen/text_padding"
+                                android:textSize="15dp"
                                 android:digits="@string/name_inputs"
                                 android:maxLines="1" />
                             <EditText
@@ -235,6 +255,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/textfield_bg"
                                 android:hint="Firstname"
+                                android:textSize="15dp"
                                 android:maxLength="20"
                                 android:paddingLeft="@dimen/text_padding"
                                 android:id="@+id/et_modify_firstname"
@@ -245,6 +266,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@drawable/textfield_bg"
                                 android:hint="Contact Number"
+                                android:textSize="15dp"
                                 android:maxLength="11"
                                 android:paddingLeft="@dimen/text_padding"
                                 android:id="@+id/et_modify_contact_number"
@@ -256,11 +278,30 @@
                                 android:background="@drawable/textfield_bg"
                                 android:hint="Email Address"
                                 android:maxLength="30"
+                                android:textSize="10dp"
                                 android:maxLines="1"
                                 android:paddingLeft="@dimen/text_padding"
+                                android:layout_marginBottom="10dp"
                                 android:id="@+id/et_modify_email_address"
                                 android:digits="@string/email_inputs"
                                 android:layout_marginTop="5dp"/>
+                            <Button
+                                android:layout_width="190dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="10dp"
+                                android:id="@+id/btn_change_profile_picture"
+                                android:background="@drawable/change_profile_image_btn_bg"/>
+                            <Button
+                                android:layout_width="150dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/btn_upload_profile_picture"
+                                android:background="@drawable/upload_image_btn_bg"/>
+                            <Button
+                                android:layout_width="150dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="5dp"
+                                android:id="@+id/btn_cancel_profile_upload_picture"
+                                android:background="@drawable/cancel_image_btn_bg"/>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -281,7 +322,6 @@
                             android:id="@+id/btn_save_details"
                             android:background="@drawable/save_btn_bg"
                             android:layout_height="match_parent" />
-
                         <Button
                             android:layout_width="match_parent"
                             android:layout_gravity="center"
@@ -290,7 +330,6 @@
                             android:layout_height="match_parent" />
                     </LinearLayout>
                  </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -317,34 +356,22 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/main_logo"/>
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:src="@drawable/main_logo"
+                                android:id="@+id/iv_apartment_image_1"/>
                             <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:paddingLeft="10dp"
-                                android:src="@drawable/main_logo"/>
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
                                 android:paddingLeft="10dp"
                                 android:src="@drawable/main_logo"
-                                android:id="@+id/imageView4" />
-
+                                android:id="@+id/iv_apartment_image_2"/>
                             <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
                                 android:paddingLeft="10dp"
-                                android:id="@+id/imageView2"
-                                android:src="@drawable/main_logo"/>
-
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:paddingLeft="10dp"
-                                android:src="@drawable/main_logo"/>
+                                android:src="@drawable/main_logo"
+                                android:id="@+id/iv_apartment_image_3"/>
                         </LinearLayout>
                     </HorizontalScrollView>
                 </LinearLayout>

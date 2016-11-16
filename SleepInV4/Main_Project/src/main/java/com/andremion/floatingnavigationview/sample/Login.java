@@ -60,9 +60,10 @@ public class Login extends Activity implements View.OnTouchListener{
         help_instructions.setTypeface(face);
 
 
-        help_message="AHOY! Landowner and welcome to Sleep In!\n" +
-                "In order to use the app you need to have an account, if you already one that's AWESOME! Just enter " +
-                "your USERNAME and PASSWORD then you're good go. ";
+        help_message="AHOY! Bedspacers and Landowners and welcome to Sleep In!\n" +
+                "In order to use the app if you're a landowner you need to have an account, if you already one that's AWESOME! " +
+                "For landowners just enter your USERNAME and PASSWORD then you're good go.\n "+
+                "And if you're a bedspacer just go to mobile app's map view and look for your most desirable apartment wherever you are."   ;
 
         btn_login.setOnTouchListener(this);
         btn_map_view.setOnTouchListener(this);

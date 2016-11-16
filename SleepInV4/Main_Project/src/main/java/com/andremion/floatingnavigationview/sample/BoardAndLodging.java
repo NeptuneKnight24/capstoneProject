@@ -77,7 +77,6 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     startActivity(intent);
                     BoardAndLodging.this.finish();
                 } else if(item.getItemId()== R.id.nav_accommodations){
-                   // startActivity(new Intent(BoardAndLodging.this,Accomodations.class));
                     Intent intent = new Intent(BoardAndLodging.this,Accomodations.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("fname",fname_con.toString());
@@ -118,6 +117,7 @@ public class BoardAndLodging extends AppCompatActivity implements View.OnTouchLi
                     Intent intent = new Intent(getApplicationContext(), Login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    BoardAndLodging.this.finish();
             }
               //  Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();

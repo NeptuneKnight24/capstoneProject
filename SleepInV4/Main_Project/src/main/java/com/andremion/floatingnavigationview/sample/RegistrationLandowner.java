@@ -34,8 +34,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
@@ -71,16 +76,10 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
     String lastname_val="",firstname_val="",middlename_val="",contact_number_val="",email_address_val="",
             username_val="",password_val="", final_password="",sex_type_val="",random_id="";
 
+    String latitude_val,longitude_val;
+
     //variables for building_name and building permit
-    String apartment_name_val,transient_name_val,bedspace_name_val,apartment_business_permit_val,transient_business_permit_val,
-            bedspace_business_permit_val;
-
-    //variables for number of units and fee per unit
-    String apartment_number_of_units_val,transient_number_of_units_val,bedspace_number_of_units_val,apartment_fee_per_unit_val,
-            transient_fee_per_unit_val,bedspace_fee_per_unit_val;
-
-    //varaibles for building location
-    String apartment_location_val,transient_location_val,bedspace_location_val;
+    String apartment_name_val,apartment_business_permit_val,apartment_number_of_units_val,apartment_fee_per_unit_val,apartment_location_val;
     private String KEY_IMAGE = "image";
 
     AlertDialog.Builder builder;
@@ -95,7 +94,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         setContentView(R.layout.registration_landowner_layout);
         builder = new AlertDialog.Builder(RegistrationLandowner.this);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-
 
 
         //view references
@@ -116,10 +114,12 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         transient_location.setVisibility(View.GONE);
         bedspace_location.setVisibility(View.GONE);
 
-
-
         //checkbox reference with actions
         apartment =(CheckBox)findViewById(R.id.cb_apartment);
+        if (apartment.isChecked()){
+            apartment_group.setVisibility(View.VISIBLE);
+            apartment_location.setVisibility(View.VISIBLE);
+        }
         apartment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -270,14 +270,8 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         password_et.setText(pref.getString("password",null));
         confirm_password_et.setText(pref.getString("password",null));
         apartment_location_et.setText(pref.getString("location",null));
-
-
-
-
-
-
-
-
+        latitude_val = pref.getString("latitude",null);
+        longitude_val = pref.getString("longitude",null);
 
     }
 
@@ -322,107 +316,15 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
         contact_number_val = contact_number_et.getText().toString();
         email_address_val= email_address_et.getText().toString();
 
-
-        if (apartment.isChecked()==true && transients.isChecked()==false && bedspace.isChecked()==false)
-        {
-            apartment_name_val = apartment_name_et.getText().toString();
-            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
-            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
-            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
-            apartment_location_val = apartment_location_et.getText().toString();
-            control="1a";
-        }
-        else if (apartment.isChecked()==true && transients.isChecked()==true && bedspace.isChecked()==false)
-        {
-            apartment_name_val = apartment_name_et.getText().toString();
-            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
-            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
-            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
-            apartment_location_val = apartment_location_et.getText().toString();
-
-            transient_name_val = transient_name_et.getText().toString();
-            transient_business_permit_val = transient_business_permit_et.getText().toString();
-            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
-            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
-            transient_location_val = transient_location_et.getText().toString();
-            control="1ab";
-        }
-        else if (apartment.isChecked()==true && transients.isChecked()==true && bedspace.isChecked()==true)
-        {
-            apartment_name_val = apartment_name_et.getText().toString();
-            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
-            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
-            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
-            apartment_location_val = apartment_location_et.getText().toString();
-
-            transient_name_val = transient_name_et.getText().toString();
-            transient_business_permit_val = transient_business_permit_et.getText().toString();
-            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
-            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
-            transient_location_val = transient_location_et.getText().toString();
-
-            bedspace_name_val = bedspace_name_et.getText().toString();
-            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
-            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
-            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
-            bedspace_location_val = bedspace_location_et.getText().toString();
-            control="1abc";
-
-        }
-        else if (apartment.isChecked()==false && transients.isChecked()==true && bedspace.isChecked()==false)
-        {
-            transient_name_val = transient_name_et.getText().toString();
-            transient_business_permit_val = transient_business_permit_et.getText().toString();
-            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
-            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
-            transient_location_val = transient_location_et.getText().toString();
-            control="2b";
-        }
-        else if (apartment.isChecked()==false && transients.isChecked()==true && bedspace.isChecked()==true)
-        {
-            transient_name_val = transient_name_et.getText().toString();
-            transient_business_permit_val = transient_business_permit_et.getText().toString();
-            transient_number_of_units_val = transient_number_of_units_et.getText().toString();
-            transient_fee_per_unit_val = transient_fee_per_unit_et.getText().toString();
-            transient_location_val = transient_location_et.getText().toString();
-
-            bedspace_name_val = bedspace_name_et.getText().toString();
-            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
-            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
-            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
-            bedspace_location_val = bedspace_location_et.getText().toString();
-            control="2bc";
-        }
-        else if (apartment.isChecked()==false && transients.isChecked()==false && bedspace.isChecked()==true)
-        {
-            bedspace_name_val = bedspace_name_et.getText().toString();
-            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
-            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
-            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
-            bedspace_location_val = bedspace_location_et.getText().toString();
-            control="3c";
-        }
-        else if (apartment.isChecked()==true && transients.isChecked()==false && bedspace.isChecked()==true)
-        {
-            apartment_name_val = apartment_name_et.getText().toString();
-            apartment_business_permit_val = apartment_business_permit_et.getText().toString();
-            apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
-            apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
-            apartment_location_val = apartment_location_et.getText().toString();
-
-            bedspace_name_val = bedspace_name_et.getText().toString();
-            bedspace_business_permit_val = bedspace_business_permit_et.getText().toString();
-            bedspace_number_of_units_val = bedspace_number_of_units_et.getText().toString();
-            bedspace_fee_per_unit_val = bedspace_fee_per_unit_et.getText().toString();
-            bedspace_location_val = bedspace_location_et.getText().toString();
-            control="3ac";
-        }
+        apartment_name_val = apartment_name_et.getText().toString();
+        apartment_business_permit_val = apartment_business_permit_et.getText().toString();
+        apartment_number_of_units_val = apartment_number_of_units_et.getText().toString();
+        apartment_fee_per_unit_val = apartment_fee_per_unit_et.getText().toString();
+        apartment_location_val = apartment_location_et.getText().toString();
 
         username_val = username_et.getText().toString();
         password_val = password_et.getText().toString();
         final_password = confirm_password_et.getText().toString();
-
-
         sex_type_val.toString();
         Random r = new Random();
         i1=r.nextInt(50000-1);
@@ -435,36 +337,25 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                 //test if what button has been touch
                 if (view.getId() == R.id.register_user_btn) {
                     if (lastname_val.trim().isEmpty() || firstname_val.trim().isEmpty() || contact_number_val.trim().isEmpty() ||
-                            email_address_val.trim().isEmpty() ||username_val.trim().isEmpty()||password_val.trim().isEmpty()||
-                            final_password.trim().isEmpty())
-                    {
+                            email_address_val.trim().isEmpty() || username_val.trim().isEmpty() || password_val.trim().isEmpty() ||
+                            final_password.trim().isEmpty()|| apartment_location_val.trim().isEmpty() ||apartment_business_permit_val.trim().isEmpty()
+                            ||  latitude_val.trim().isEmpty() ||longitude_val.trim().isEmpty()) {
                         builder.setTitle("Something went wrong.....");
                         builder.setMessage("Please fill up all the fields...");
                         displayAlert("input_error");
-                    }
-                    else if (!email_address_val.contains(character))
-                    {
+                    } else if (!email_address_val.contains(character)) {
                         builder.setTitle("Something went wrong.....");
                         builder.setMessage("Email address INVALID");
                         email_address_et.requestFocus();
                         displayAlert("input_error");
-                    } else if (apartment.isChecked()==false && transients.isChecked()==false && bedspace.isChecked()==false)
-                    {
-                        builder.setTitle("Something went wrong.....");
-                        builder.setMessage("Insufficient business information");
-                        email_address_et.requestFocus();
-                        displayAlert("input_error");
-                    }
-                    else
-                    {
-                        if (!password_val.equals(final_password))
-                        {
+                    } else {
+                        if (!password_val.equals(final_password)) {
                             builder.setTitle("Something went wrong.....");
-                            builder.setMessage("Your Passwords are not matching....");
+                            builder.setMessage("Your Passwords does not match....");
                             displayAlert("input_error");
                         }
                         {
-                            final ProgressDialog loading = ProgressDialog.show(this,"Connecting...","Please wait...",false,false);
+                            final ProgressDialog loading = ProgressDialog.show(this, "Connecting...", "Please wait...", false, false);
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, reg_url,
                                     new Response.Listener<String>() {
                                         @Override
@@ -479,112 +370,56 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                                 builder.setMessage(message);
                                                 displayAlert(code);
                                             } catch (JSONException e) {
-                                                e.printStackTrace();
+                                               e.printStackTrace();
                                             }
                                         }
                                     }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    loading.dismiss();
-                                    Toast.makeText(RegistrationLandowner.this,"Connection Error",Toast.LENGTH_SHORT).show();
-                                    error.printStackTrace();
+
+                                    if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                        loading.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Cannot connect to the Internet...Please check your connection!", Toast.LENGTH_SHORT).show();
+                                    } else if (error instanceof AuthFailureError) {
+                                        loading.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Cannot connect to the Internet...Please check your connection!", Toast.LENGTH_SHORT).show();
+                                    } else if (error instanceof ServerError) {
+                                        loading.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Oops there's something wrong with our server. Please try again after some time!!", Toast.LENGTH_SHORT).show();
+                                    } else if (error instanceof NetworkError) {
+                                        loading.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_SHORT).show();
+                                    } else if (error instanceof ParseError) {
+                                        loading.dismiss();
+                                        Toast.makeText(getApplicationContext(), "Something went wrong! Please try again after some time!!", Toast.LENGTH_SHORT).show();
+
+                                    }
+
                                 }
-                            }){
+                                   // error.printStackTrace();
+
+                            }) {
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
-                                    Map<String,String> params = new HashMap<String, String>();
+                                    Map<String, String> params = new HashMap<String, String>();
                                     //Converting Bitmap to String
                                     String image = getStringImage(bitmap);
-                                    params.put("uid",random_id);
-                                    params.put("lname",lastname_val.toUpperCase());
-                                    params.put("fname",firstname_val.toUpperCase());
-                                    params.put("midname",middlename_val.toUpperCase());
-                                    params.put("gender",sex_type_val.toUpperCase());
-//                                    if(control.toString().contains("1a")) {
-                                    params.put("apartment_name",apartment_name_val.toUpperCase());
-                                    params.put("apartment_permit",apartment_business_permit_val);
-                                    params.put("apartment_available_space",apartment_number_of_units_val);
-                                    params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-                                    params.put("apartment_location",apartment_location_val.toUpperCase());
-
-//                                    }else if (control.toString().contains("1ab")){
-//                                        params.put("apartment_name",apartment_name_val);
-//                                        params.put("apartment_permit",apartment_business_permit_val);
-//                                        params.put("apartment_available_space",apartment_number_of_units_val);
-//                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-//                                        params.put("apartment_location",apartment_location_val);
-//
-//                                        params.put("transient_name",transient_name_val);
-//                                        params.put("transient_permit",transient_business_permit_val);
-//                                        params.put("transient_available_space",transient_number_of_units_val);
-//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-//                                        params.put("transient_location",transient_location_val);
-//
-//                                    }else if (control.toString().contains("1abc")){
-//                                        params.put("apartment_name",apartment_name_val);
-//                                        params.put("apartment_permit",apartment_business_permit_val);
-//                                        params.put("apartment_available_space",apartment_number_of_units_val);
-//                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-//                                        params.put("apartment_location",apartment_location_val);
-//
-//                                        params.put("transient_name",transient_name_val);
-//                                        params.put("transient_permit",transient_business_permit_val);
-//                                        params.put("transient_available_space",transient_number_of_units_val);
-//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-//                                        params.put("transient_location",transient_location_val);
-//
-//                                        params.put("bedspace_name",bedspace_name_val);
-//                                        params.put("bedspace_permit",bedspace_business_permit_val);
-//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-//                                        params.put("bedspace_location",bedspace_location_val);
-//
-//                                    }else if(control.toString().contains("2b")){
-//
-//                                        params.put("transient_name",transient_name_val);
-//                                        params.put("transient_permit",transient_business_permit_val);
-//                                        params.put("transient_available_space",transient_number_of_units_val);
-//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-//                                        params.put("transient_location",transient_location_val);
-//                                    }else if(control.toString().contains("2bc")){
-//
-//                                        params.put("transient_name",transient_name_val);
-//                                        params.put("transient_permit",transient_business_permit_val);
-//                                        params.put("transient_available_space",transient_number_of_units_val);
-//                                        params.put("transient_fee_per_unit",transient_fee_per_unit_val);
-//                                        params.put("transient_location",transient_location_val);
-//
-//                                        params.put("bedspace_name",bedspace_name_val);
-//                                        params.put("bedspace_permit",bedspace_business_permit_val);
-//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-//                                        params.put("bedspace_location",bedspace_location_val);
-//
-//                                    }else if(control.toString().contains("3c")){
-//                                        params.put("bedspace_name",bedspace_name_val);
-//                                        params.put("bedspace_permit",bedspace_business_permit_val);
-//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-//                                        params.put("bedspace_location",bedspace_location_val);
-//
-//                                    }else if(control.toString().contains("3ac")){
-//                                        params.put("bedspace_name",bedspace_name_val);
-//                                        params.put("bedspace_permit",bedspace_business_permit_val);
-//                                        params.put("bedspace_available_space",bedspace_number_of_units_val);
-//                                        params.put("bedspace_fee_per_unit",bedspace_fee_per_unit_val);
-//                                        params.put("bedspace_location",bedspace_location_val);
-//
-//                                        params.put("apartment_name",apartment_name_val);
-//                                        params.put("apartment_permit",apartment_business_permit_val);
-//                                        params.put("apartment_available_space",apartment_number_of_units_val);
-//                                        params.put("apartment_fee_per_unit",apartment_fee_per_unit_val);
-//                                        params.put("apartment_location",apartment_location_val);
-//                                    }
-
-                                    params.put("num",contact_number_val.toUpperCase());
-                                    params.put("email",email_address_val.toUpperCase());
-                                    params.put("uname",username_val);
-                                    params.put("pword",final_password);
+                                    params.put("uid", random_id);
+                                    params.put("lname", lastname_val.toUpperCase());
+                                    params.put("fname", firstname_val.toUpperCase());
+                                    params.put("midname", middlename_val.toUpperCase());
+                                    params.put("gender", sex_type_val.toUpperCase());
+                                    params.put("apartment_name", apartment_name_val.toUpperCase());
+                                    params.put("apartment_permit", apartment_business_permit_val);
+                                    params.put("apartment_available_space", apartment_number_of_units_val);
+                                    params.put("apartment_fee_per_unit", apartment_fee_per_unit_val);
+                                    params.put("apartment_location", apartment_location_val.toUpperCase());
+                                    params.put("apartment_latitude", latitude_val);
+                                    params.put("apartment_longitude", longitude_val);
+                                    params.put("num", contact_number_val.toUpperCase());
+                                    params.put("email", email_address_val.toUpperCase());
+                                    params.put("uname", username_val);
+                                    params.put("pword", final_password);
                                     params.put(KEY_IMAGE, image);
                                     return params;
 
@@ -594,7 +429,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
 //                           Toast.makeText(this, ""+lastname_val+"\n"+firstname_val+"\n"+middlename_val+"\n"+sex_type_val+"\n"+contact_number_val+
 //                                       ""+email_address_val+"\n"+username_val+"\n"+password_val+"\n"+final_password+"\n"+apartment_name_val
 //                                           +"\n"+apartment_business_permit_val+"\n"+apartment_fee_per_unit_val+"\n"+apartment_number_of_units_val
-//                                           +"\n"+apartment_location_val
+//                                           +"\n"+apartment_location_val+"\n"+latitude_val+"\n"+longitude_val
 //                                      , Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -609,6 +444,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                     startActivity(new Intent(RegistrationLandowner.this,Login.class));
                     finish();
                 }else if (view.getId() == R.id.btn_search_location_apartment){
+                    //for edittext - to not clear when activity is changed
                     apartment_location_et.setText("");
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
                     SharedPreferences.Editor editor = pref.edit();
@@ -624,7 +460,10 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                     editor.putString("username",username_val);
                     editor.putString("password",password_val);
                     editor.putString("location",apartment_location_val);
+                    editor.putString("latitude",latitude_val);
+                    editor.putString("longitude",longitude_val);
                     editor.putString("finalpassword",final_password);
+
                     editor.commit();
                     startActivity(new Intent(RegistrationLandowner.this,GoogleMapLandowners.class));
                     finish();
@@ -645,7 +484,6 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
     @Override
     public void onStop() {
         super.onStop();
-
     }
 
     private void displayAlert(final String code) {
@@ -653,8 +491,7 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (code.equals("input_error")) {
-                    password_et.setText("");
-                    confirm_password_et.setText("");
+                    email_address_et.setText("");
                 }
                 else if (code.equals("reg_success"))
                 {
@@ -672,12 +509,17 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                     username_et.setText("");
                     password_et.setText("");
                     confirm_password_et.setText("");
+                    apartment_location_et.setText("");
+                    apartment_name_et.setText("");
+                    apartment_business_permit_et.setText("");
+                    apartment_fee_per_unit_et.setText("");
                 }
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     //call this to select image from gallery
     private void showFileChooser() {
         Intent intent = new Intent();
