@@ -78,9 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         building_fee_per_unit_con = bundle.getString("apartmentfee");
         building_location_con= bundle.getString("apartmentlocation");
 
-
-
-
         mFloatingNavigationView = (FloatingNavigationView) findViewById(R.id.floating_navigation_view);
         mFloatingNavigationView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Intent intent = new Intent(getApplicationContext(), Login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
                 }
                // Snackbar.make((View) mFloatingNavigationView.getParent(), item.getTitle() + " Selected!", Snackbar.LENGTH_SHORT).show();
                 mFloatingNavigationView.close();

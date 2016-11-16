@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -19,6 +20,7 @@ public class GoogleMapLandowners extends FragmentActivity implements View.OnTouc
     Button go_back,set_location,search_location;
     EditText search_location_field;
     String location="";
+    String latitude="",longitude="";
 
 
     @Override
@@ -34,6 +36,7 @@ public class GoogleMapLandowners extends FragmentActivity implements View.OnTouc
         go_back=(Button)findViewById(R.id.btn_go_to_reg);
         go_back.setOnTouchListener(this);
         set_location.setOnTouchListener(this);
+        search_location.setOnTouchListener(this);
     }
 
 
@@ -43,21 +46,26 @@ public class GoogleMapLandowners extends FragmentActivity implements View.OnTouc
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_UP:
                 if (view.getId() == R.id.btn_set_location) {
-                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("location",location);
-                    editor.commit();
-                    startActivity(new Intent(GoogleMapLandowners.this, RegistrationLandowner.class));
-                    finish();
-
-//                    Intent intent = new Intent(GoogleMapLandowners.this,RegistrationLandowner.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("location",location.toString());
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-                }else if (view.getId() == R.id.btn_go_to_reg){
-                    startActivity(new Intent(GoogleMapLandowners.this, RegistrationLandowner.class));
-                    finish();
+                    if (latitude.trim().isEmpty() && longitude.trim().isEmpty()){
+                        Toast.makeText(this,"No location selected, Please tap a location on the map", Toast.LENGTH_SHORT).show();
+                        }else {
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("location", location);
+                            editor.putString("latitude", latitude);
+                            editor.putString("longitude", longitude);
+                            editor.commit();
+                            startActivity(new Intent(GoogleMapLandowners.this, RegistrationLandowner.class));
+                            finish();
+                        }
+                    }else if (view.getId() == R.id.btn_go_to_reg){
+                        startActivity(new Intent(GoogleMapLandowners.this, RegistrationLandowner.class));
+                        finish();
+                    }else if (view.getId() == R.id.btn_search_location){
+                        location= search_location_field.getText().toString();
+                        CustomMessageEventSearchLandowner event_search = new CustomMessageEventSearchLandowner();
+                        event_search.setCustomMessage(location.toString());
+                        EventBus.getDefault().post(event_search);
                 }
         }
         return true;
@@ -68,4 +76,17 @@ public class GoogleMapLandowners extends FragmentActivity implements View.OnTouc
         location= search_location_field.getText().toString();
 
     }
+    @Subscribe
+    public void onEvent(CustomMessageEventLatitude event_latitude){
+        latitude = event_latitude.getCustomMessage();
+
+    }
+    @Subscribe
+    public void onEvent(CustomMessageEventLongitude event_longitude){
+        longitude = event_longitude.getCustomMessage();
+
+    }
+
+
+
 }

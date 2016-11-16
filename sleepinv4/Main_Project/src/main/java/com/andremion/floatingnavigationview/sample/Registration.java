@@ -184,6 +184,7 @@ public class Registration extends Activity implements  AdapterView.OnItemClickLi
                                                 builder.setTitle("Server Response....");
                                                 builder.setMessage(message);
                                                 displayAlert(code);
+
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }

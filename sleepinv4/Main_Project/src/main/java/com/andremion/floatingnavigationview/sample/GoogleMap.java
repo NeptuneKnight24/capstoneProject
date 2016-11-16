@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
 import java.util.List;
@@ -123,6 +124,12 @@ public class GoogleMap extends FragmentActivity implements View.OnTouchListener 
 
     @Override
     public void onLocationChanged(Location location) {
+
+    }
+    @Subscribe
+    public void onEvent(CustomMessageEvent event){
+        search_location_field.setText(event.getCustomMessage());
+        location= search_location_field.getText().toString();
 
     }
 }

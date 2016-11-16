@@ -6,7 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
     tools:context=".GoogleMapLandowners">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,17 +62,22 @@
         android:layout_marginTop="10dp"
         android:gravity="left"
         android:layout_gravity="center">
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/set_location_bg_btn"
             android:id="@+id/btn_set_location"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="10sp"
+            android:text="Tip: To use your current location don't tap anywhere on the map just click Set Location"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="5dp">
         <fragment
@@ -77,5 +85,6 @@
             android:name="com.andremion.floatingnavigationview.sample.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>
