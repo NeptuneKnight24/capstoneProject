@@ -2,6 +2,7 @@ package com.andremion.floatingnavigationview.sample;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
@@ -46,9 +47,9 @@ import java.util.List;
 public class MapFragmentViewOnly extends SupportMapFragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnInfoWindowClickListener,
-        GoogleMap.OnMapLongClickListener,
+//        GoogleMap.OnMapLongClickListener,
         GoogleMap.InfoWindowAdapter,
-        GoogleMap.OnMapClickListener,
+//        GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener {
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
@@ -86,9 +87,9 @@ public class MapFragmentViewOnly extends SupportMapFragment implements GoogleApi
 
     private void initListeners() {
         getMap().setOnMarkerClickListener(this);
-        getMap().setOnMapLongClickListener(this);
+//        getMap().setOnMapLongClickListener(this);
         getMap().setOnInfoWindowClickListener(this);
-        getMap().setOnMapClickListener(this);
+//        getMap().setOnMapClickListener(this);
     }
 
     @Override
@@ -148,47 +149,51 @@ public class MapFragmentViewOnly extends SupportMapFragment implements GoogleApi
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+        //Toast.makeText(getActivity(), "Title: " + marker.getTitle()+marker.getSnippet(), Toast.LENGTH_SHORT).show();
+//        String apartment_uid= marker.getSnippet().toString();
+//        Toast.makeText(getActivity(), "" + apartment_uid, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), AccomodationsForViewing.class));
 
 
     }
 
-    @Override
-    public void onMapClick(LatLng latLng) {
-        MarkerOptions options = new MarkerOptions().position(latLng);
-        options.title(getAddressFromLatLng(latLng));
+//    @Override
+//    public void onMapClick(LatLng latLng) {
+//        MarkerOptions options = new MarkerOptions().position(latLng);
+//        options.title(getAddressFromLatLng(latLng));
+//
+//        options.icon(BitmapDescriptorFactory.defaultMarker());
+//        getMap().addMarker(options);
+//
+//    }
+//
+//    @Override
+//    public void onMapLongClick(LatLng latLng) {
+//        MarkerOptions options = new MarkerOptions().position(latLng);
+//        options.title(getAddressFromLatLng(latLng));
+//
+//        options.icon(BitmapDescriptorFactory.fromBitmap(
+//                BitmapFactory.decodeResource(getResources(),
+//                        R.mipmap.launcher_logo)));
+//
+//        getMap().addMarker(options);
+//
+//
+//    }
 
-        options.icon(BitmapDescriptorFactory.defaultMarker());
-        getMap().addMarker(options);
-
-    }
-
-    @Override
-    public void onMapLongClick(LatLng latLng) {
-        MarkerOptions options = new MarkerOptions().position(latLng);
-        options.title(getAddressFromLatLng(latLng));
-
-        options.icon(BitmapDescriptorFactory.fromBitmap(
-                BitmapFactory.decodeResource(getResources(),
-                        R.mipmap.launcher_logo)));
-
-        getMap().addMarker(options);
-
-
-    }
-
-    private String getAddressFromLatLng(LatLng latLng) {
-        Geocoder geocoder = new Geocoder(getActivity());
-
-        String address = "";
-        try {
-            address = geocoder
-                    .getFromLocation(latLng.latitude, latLng.longitude, 1)
-                    .get(0).getAddressLine(0);
-
-        } catch (IOException e) {
-        }
-        return address;
-    }
+//    private String getAddressFromLatLng(LatLng latLng) {
+//        Geocoder geocoder = new Geocoder(getActivity());
+//
+//        String address = "";
+//        try {
+//            address = geocoder
+//                    .getFromLocation(latLng.latitude, latLng.longitude, 1)
+//                    .get(0).getAddressLine(0);
+//
+//        } catch (IOException e) {
+//        }
+//        return address;
+//    }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
@@ -236,6 +241,8 @@ public class MapFragmentViewOnly extends SupportMapFragment implements GoogleApi
                             String apartmentLandowner = jsonObject.getString("landowner_name");
                             String apartmentLatitude = jsonObject.getString("apartment_latitude");
                             String apartmentLongitude = jsonObject.getString("apartment_longitude");
+                            String apartmentLandownerID= jsonObject.getString("landowner_uid");
+
 
 
 //                            String latitude = jsonObject.getString("latitude");
@@ -247,8 +254,8 @@ public class MapFragmentViewOnly extends SupportMapFragment implements GoogleApi
 
                             LatLng fetchedLoc = new LatLng(Double.parseDouble(apartmentLatitude), Double.parseDouble(apartmentLongitude));
                             MarkerOptions options = new MarkerOptions().position(fetchedLoc);
-                            options.title(apartmentName);
-                            options.snippet("Price per unit: "+apartmentFeePerUnit);
+                            options.title("Apartment Name: "+apartmentName);
+                            options.snippet(apartmentLandownerID);
                             options.icon(BitmapDescriptorFactory.fromBitmap(
                                     BitmapFactory.decodeResource(getResources(),
                                             R.mipmap.launcher_logo)));

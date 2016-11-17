@@ -61,9 +61,12 @@ public class Login extends Activity implements View.OnTouchListener{
 
 
         help_message="AHOY! Bedspacers and Landowners and welcome to Sleep In!\n" +
-                "In order to use the app if you're a landowner you need to have an account, if you already one that's AWESOME! " +
-                "For landowners just enter your USERNAME and PASSWORD then you're good go.\n "+
-                "And if you're a bedspacer just go to mobile app's map view and look for your most desirable apartment wherever you are."   ;
+                "WHAT IS SLEEP IN?\n"+
+                "SLEEP IN is a mobile app for the convenience of Landowners and Bedspacers - people looking for a place to stay "+
+                "HOW TO USE SLEEP IN?\n"+
+                "In order to use the app if you're a landowner you need to have an account, if you already have one that's AWESOME! " +
+                "For Landowners just enter your USERNAME and PASSWORD then you're good go, if you don't have one REGISTER NOW!.\n "+
+                "And for Bedspacers just go to the mobile app's map view and look for your most desirable apartment wherever you are."   ;
 
         btn_login.setOnTouchListener(this);
         btn_map_view.setOnTouchListener(this);

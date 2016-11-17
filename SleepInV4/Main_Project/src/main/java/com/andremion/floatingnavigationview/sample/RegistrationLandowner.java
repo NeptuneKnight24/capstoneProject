@@ -383,24 +383,27 @@ public class RegistrationLandowner extends Activity implements  AdapterView.OnIt
                                     } else if (error instanceof AuthFailureError) {
                                         loading.dismiss();
                                         Toast.makeText(getApplicationContext(), "Cannot connect to the Internet...Please check your connection!", Toast.LENGTH_SHORT).show();
+
                                     } else if (error instanceof ServerError) {
                                         loading.dismiss();
                                         Toast.makeText(getApplicationContext(), "Oops there's something wrong with our server. Please try again after some time!!", Toast.LENGTH_SHORT).show();
-                                    } else if (error instanceof NetworkError) {
+                                    } else if (error instanceof NetworkError) {builder.setTitle("Server Response....");
+                                        builder.setMessage("There's something wrong with your internet connection , please try again");
                                         loading.dismiss();
                                         Toast.makeText(getApplicationContext(), "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_SHORT).show();
+
                                     } else if (error instanceof ParseError) {
                                         loading.dismiss();
                                         Toast.makeText(getApplicationContext(), "Something went wrong! Please try again after some time!!", Toast.LENGTH_SHORT).show();
-
                                     }
+                                        error.printStackTrace();
 
                                 }
-                                   // error.printStackTrace();
 
                             }) {
                                 @Override
                                 protected Map<String, String> getParams() throws AuthFailureError {
+
                                     Map<String, String> params = new HashMap<String, String>();
                                     //Converting Bitmap to String
                                     String image = getStringImage(bitmap);
