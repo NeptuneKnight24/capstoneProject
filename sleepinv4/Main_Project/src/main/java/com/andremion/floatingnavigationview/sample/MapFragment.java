@@ -69,14 +69,6 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                 .build();
 
     initListeners();
-        getMap().setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-            @Override
-            public boolean onMyLocationButtonClick() {
-                Toast.makeText(getActivity(), "I have been click", Toast.LENGTH_SHORT).show();
-
-                return true;
-            }
-        });
 
 
     }
